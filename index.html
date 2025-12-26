@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adam Almaktari | CS @ NYU</title>
+  <meta name="description" content="Adam Almaktari — CS @ NYU. Java, Data Structures, IT leadership (HESS). Projects, experience, and contact." />
+  <style>
+    :root{
+      --bg:#070a12;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.68);
+      --line:rgba(255,255,255,.12);
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(255,255,255,.04);
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1100px;
+
+      --a: rgba(101,134,255,.35);
+      --b: rgba(255,98,190,.24);
+      --c: rgba(54,255,210,.18);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 15% 10%, var(--a), transparent 62%),
+        radial-gradient(700px 460px at 85% 18%, var(--b), transparent 58%),
+        radial-gradient(920px 620px at 50% 112%, var(--c), transparent 62%),
+        radial-gradient(500px 300px at 50% 0%, rgba(255,255,255,.06), transparent 60%),
+        var(--bg);
+      line-height: 1.55;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:none}
+    .wrap{max-width: var(--max); margin:0 auto; padding: 26px 18px 90px;}
+
+    /* ---------- NAV ---------- */
+    .nav{
+      position: sticky; top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(7,10,18,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 750;
+      letter-spacing: .2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(101,134,255,.9), rgba(54,255,210,.75));
+      box-shadow: 0 0 22px rgba(101,134,255,.6);
+    }
+    .nav-links{
+      display:flex; align-items:center; gap: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .nav-links a:hover{
+      border-color: var(--line);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.86);
+    }
+
+    /* ---------- HERO ---------- */
+    header{padding: 30px 0 10px;}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.35fr .95fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 920px){ .hero{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 250px at 15% 0%, rgba(101,134,255,.18), transparent 55%),
+        radial-gradient(520px 260px at 90% 10%, rgba(255,98,190,.14), transparent 60%);
+      pointer-events:none;
+      opacity: .9;
+    }
+    .panel > * { position: relative; }
+
+    .kicker{
+      display:flex; gap:10px; align-items:center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .kicker .pill{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    h1{
+      margin: 0;
+      font-size: 48px;
+      letter-spacing: -1px;
+      line-height: 1.05;
+    }
+    @media (max-width: 520px){ h1{ font-size: 40px; } }
+
+    .subtitle{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 62ch;
+    }
+
+    .btnrow{display:flex; flex-wrap:wrap; gap: 10px; margin-top: 16px;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-size: 14px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary{
+      border-color: rgba(101,134,255,.5);
+      background: rgba(101,134,255,.18);
+    }
+    .btn.primary:hover{
+      background: rgba(101,134,255,.22);
+      border-color: rgba(101,134,255,.65);
+    }
+    .btn.ghost{
+      background: transparent;
+    }
+    .btn small{ color: var(--muted); font-size: 12px; }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 520px){ .mini-grid{ grid-template-columns: 1fr; } }
+
+    .mini{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .mini h3{ margin:0 0 6px; font-size: 14px; letter-spacing:.2px; }
+    .mini p{ margin:0; color: var(--muted); font-size: 13px; }
+
+    /* ---------- SECTIONS ---------- */
+    section{ margin-top: 26px; }
+    .section-title{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px;
+      margin: 0 0 10px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 15px;
+      color: rgba(255,255,255,.88);
+      letter-spacing: .2px;
+      text-transform: uppercase;
+    }
+    .hint{ color: var(--muted); font-size: 13px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 620px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius2);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+      transition: transform .16s ease, border-color .16s ease;
+      min-height: 160px;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.20);
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(480px 240px at 20% 0%, rgba(101,134,255,.14), transparent 55%),
+        radial-gradient(460px 260px at 90% 20%, rgba(255,98,190,.12), transparent 58%);
+      opacity: 0;
+      transition: opacity .16s ease;
+      pointer-events:none;
+    }
+    .card:hover:before{opacity: 1;}
+    .card > *{ position: relative; }
+
+    .card h3{ margin: 0 0 6px; font-size: 16px; }
+    .card p{ margin: 0; color: var(--muted); font-size: 14px; }
+    .meta{
+      margin-top: 10px;
+      display:flex; flex-wrap:wrap; gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .tag{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 6px 9px;
+      border-radius: 999px;
+    }
+    .card .links{ margin-top: 12px; display:flex; gap: 10px; flex-wrap: wrap; }
+    .link{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size: 13px;
+      color: rgba(255,255,255,.86);
+      transition: .15s ease;
+    }
+    .link:hover{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.18);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- TIMELINE ---------- */
+    .timeline{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.035);
+      border-radius: var(--radius2);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .titem{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      transition:.15s ease;
+    }
+    .titem:hover{ border-color: var(--line); background: rgba(255,255,255,.03); }
+    @media (max-width: 720px){ .titem{ grid-template-columns: 1fr; } }
+
+    .twhen{ color: var(--muted); font-size: 13px; }
+    .tmain h4{ margin:0; font-size: 15px; }
+    .tmain .role{ color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .tmain ul{ margin: 10px 0 0; padding-left: 18px; color: rgba(255,255,255,.82); }
+    .tmain li{ margin: 6px 0; color: var(--muted); font-size: 13px; }
+
+    /* ---------- SKILLS ---------- */
+    .skills{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){ .skills{ grid-template-columns: 1fr; } }
+
+    .skillbox{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius2);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .skillbox h3{ margin:0 0 10px; font-size: 14px; color: rgba(255,255,255,.88); letter-spacing:.2px; text-transform: uppercase; }
+    .skillrow{ display:flex; flex-wrap:wrap; gap: 10px; }
+    .chip{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: rgba(255,255,255,.82);
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){ .contact{ grid-template-columns: 1fr; } }
+
+    .note{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer{
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align:center;
+      opacity: .9;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+    .fade{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .fade{opacity:1; transform:none}
+      .fade.show{opacity:1; transform:none}
+      html{scroll-behavior:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Adam Almaktari</span>
+      </div>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="fade">
+      <div class="hero">
+        <div class="panel">
+          <div class="kicker">
+            <span class="pill">Computer Science @ NYU</span>
+            <span class="pill">Java • Data Structures</span>
+            <span class="pill">IT Co-Head (HESS)</span>
+          </div>
+
+          <h1>Building real skills.<br/>Shipping clean work.</h1>
+
+          <p class="subtitle">
+            I’m a CS student focused on fundamentals that actually matter: data structures, clean OOP, testing,
+            and writing code that’s easy to read. I also support student org tech operations at NYU.
+          </p>
+
+          <div class="btnrow">
+            <a class="btn primary" href="./resume.pdf" target="_blank" rel="noopener">Open Resume (PDF) →</a>
+            <a class="btn" href="https://www.linkedin.com/in/adam-almaktari" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/adam-a11" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn ghost" href="mailto:aa12255@nyu.edu">Email</a>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini">
+              <h3>What I’m best at</h3>
+              <p>Java + DS foundations, debugging, and making coursework feel like a real product.</p>
+            </div>
+            <div class="mini">
+              <h3>What I’m improving</h3>
+              <p>More standout “real-world” projects + tighter writeups and documentation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title" style="margin-bottom:10px;">
+            <h2>Now</h2>
+            <div class="hint">Updated <span id="today"></span></div>
+          </div>
+
+          <div class="mini" style="margin-bottom:12px;">
+            <h3>Current focus</h3>
+            <p>Turning my projects into clear, impressive case studies (readme, screenshots, clean structure).</p>
+          </div>
+
+          <div class="mini">
+            <h3>Quick links</h3>
+            <p style="margin-bottom:10px;">Fast access for recruiters.</p>
+            <div class="btnrow" style="margin-top:0;">
+              <a class="btn" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">DS Repo →</a>
+              <a class="btn" href="#contact">Contact →</a>
+            </div>
+          </div>
+
+          <p class="note">
+            Tip: this right panel makes the site feel “alive” and intentional.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <section id="projects" class="fade">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <div class="hint">Readable, practical, and polished</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Data Structures Projects (Java)</h3>
+          <p>Core structures with solid OOP design and edge-case thinking. Organized as a clean repo.</p>
+          <div class="meta">
+            <span class="tag">Java</span>
+            <span class="tag">Linked Lists</span>
+            <span class="tag">Stacks / Queues</span>
+            <span class="tag">Testing</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">View repo →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Postfix Calculator</h3>
+          <p>Stack-based expression evaluation + parsing utilities. A clean example of using stacks correctly.</p>
+          <div class="meta">
+            <span class="tag">Stacks</span>
+            <span class="tag">Parsing</span>
+            <span class="tag">Java</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">See in DS repo →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Linked List Album System</h3>
+          <p>Custom list-based album/photo management with input/output handling and structured design.</p>
+          <div class="meta">
+            <span class="tag">Linked Lists</span>
+            <span class="tag">I/O</span>
+            <span class="tag">OOP</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">Open repo →</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="note">
+        Next upgrade: add 1–2 “non-class” projects and this instantly becomes internship-tier.
+      </p>
+    </section>
+
+    <section id="experience" class="fade">
+      <div class="section-title">
+        <h2>Experience</h2>
+        <div class="hint">Leadership + real execution</div>
+      </div>
+
+      <div class="timeline">
+        <div class="titem">
+          <div class="twhen">Sep 2025 — Present</div>
+          <div class="tmain">
+            <h4>Hemmes Engineering & Science Society (HESS)</h4>
+            <div class="role">IT Co-Head • New York, NY</div>
+            <ul>
+              <li>Support tech operations for meetings, workshops, and events (setup → live support → teardown).</li>
+              <li>Improve documentation and workflows to reduce repeated issues and speed up onboarding.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="twhen">Feb 2025 — May 2025</div>
+          <div class="tmain">
+            <h4>Hatch</h4>
+            <div class="role">Software Engineering • New York, NY</div>
+            <ul>
+              <li>Contributed to an early-stage platform connecting NYU students with projects and collaboration.</li>
+              <li>Worked in sprint cycles: implement → test → improve from feedback.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="titem">
+          <div class="twhen">Jul 2025 — Aug 2025</div>
+          <div class="tmain">
+            <h4>Golden Coast Company</h4>
+            <div class="role">Manufacturing & Production Associate • Salalah, Oman</div>
+            <ul>
+              <li>Tracked production output and workflow documentation to support standards and reliability.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="fade">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <div class="hint">What I can confidently use</div>
+      </div>
+
+      <div class="skills">
+        <div class="skillbox">
+          <h3>Technical</h3>
+          <div class="skillrow">
+            <span class="chip">Java</span>
+            <span class="chip">Python</span>
+            <span class="chip">Data Structures</span>
+            <span class="chip">Algorithms (foundations)</span>
+            <span class="chip">OOP</span>
+            <span class="chip">Debugging</span>
+            <span class="chip">Testing mindset</span>
+          </div>
+        </div>
+
+        <div class="skillbox">
+          <h3>Tools & Workflow</h3>
+          <div class="skillrow">
+            <span class="chip">Git</span>
+            <span class="chip">GitHub</span>
+            <span class="chip">Eclipse</span>
+            <span class="chip">Excel (formulas/pivots)</span>
+            <span class="chip">Google Sheets</span>
+            <span class="chip">Documentation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="fade">
+      <div class="section-title">
+        <h2>About</h2>
+        <div class="hint">Short + strong</div>
+      </div>
+
+      <div class="panel" style="box-shadow: var(--shadow);">
+        <p style="margin:0; color: rgba(255,255,255,.85); font-size: 15px;">
+          I’m Adam — a Computer Science student at NYU. I care about building strong fundamentals and making my work look
+          professional: clean code, clear structure, and writing that explains what I did and why it matters.
+          I’m actively growing my project portfolio and looking for opportunities where I can contribute and learn fast.
+        </p>
+
+        <div class="btnrow" style="margin-top:14px;">
+          <a class="btn primary" href="./resume.pdf" target="_blank" rel="noopener">Resume →</a>
+          <a class="btn" href="https://www.linkedin.com/in/adam-almaktari" target="_blank" rel="noopener">LinkedIn →</a>
+          <a class="btn" href="https://github.com/adam-a11" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="fade">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <div class="hint">Fast + professional</div>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <h3>Let’s connect</h3>
+          <p>Best way: email or LinkedIn. I respond quickly.</p>
+          <div class="links" style="margin-top:12px;">
+            <a class="link" href="mailto:aa12255@nyu.edu">aa12255@nyu.edu →</a>
+            <a class="link" href="https://www.linkedin.com/in/adam-almaktari" target="_blank" rel="noopener">LinkedIn →</a>
+          </div>
+          <p class="note">If you publish this with GitHub Pages later, this becomes your main “public link.”</p>
+        </div>
+
+        <div class="card">
+          <h3>Resume</h3>
+          <p>This button opens the PDF in this same folder.</p>
+          <div class="links" style="margin-top:12px;">
+            <a class="link" href="./resume.pdf" target="_blank" rel="noopener">Open Resume (PDF) →</a>
+          </div>
+          <p class="note">You already did it right: `index.html` + `resume.pdf` in the same folder.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Adam Almaktari • Built with HTML/CSS
+    </footer>
+  </div>
+
+  <script>
+    // year + "today"
+    document.getElementById("y").textContent = new Date().getFullYear();
+    const d = new Date();
+    const fmt = d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"2-digit" });
+    document.getElementById("today").textContent = fmt;
+
+    // fade-in on scroll
+    const els = document.querySelectorAll(".fade");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>
+
