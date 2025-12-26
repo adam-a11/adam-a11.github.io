@@ -1,68 +1,541 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Adam Almaktari</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body { font-family: Inter, system-ui, sans-serif; background:#0f172a; color:#e5e7eb; margin:0; }
-.container { max-width:1000px; margin:auto; padding:60px 30px; }
-h1 { font-size:52px; margin-bottom:10px; }
-.subtitle { color:#94a3b8; font-size:18px; margin-bottom:30px; }
-.links a { margin-right:18px; color:#38bdf8; text-decoration:none; font-weight:600; }
-.section { margin-top:70px; }
-.card { background:#020617; border-radius:16px; padding:22px; margin-top:20px; box-shadow:0 0 0 1px #1e293b; }
-.card h3 { margin:0 0 8px 0; }
-.tag { display:inline-block; background:#1e293b; padding:4px 10px; border-radius:8px; font-size:12px; margin-right:6px; color:#cbd5f5; }
-footer { text-align:center; margin-top:100px; color:#64748b; font-size:13px; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adam Almaktari — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#050712;
+      --bg1:#070A18;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.09);
+      --border:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.66);
+      --muted2:rgba(255,255,255,.50);
+      --a:#7C3AED;   /* purple */
+      --b:#22D3EE;   /* cyan */
+      --c:#A3FF12;   /* lime */
+      --shadow: 0 18px 70px rgba(0,0,0,.58);
+      --r:18px;
+      --r2:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 12% 10%, rgba(124,58,237,.34), transparent 62%),
+        radial-gradient(950px 700px at 88% 20%, rgba(34,211,238,.22), transparent 55%),
+        radial-gradient(900px 700px at 50% 88%, rgba(163,255,18,.10), transparent 60%),
+        linear-gradient(180deg,var(--bg0),var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* tasteful grain */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.18;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+    }
+
+    a{color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 18px}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter: blur(14px);
+      background: rgba(5,7,18,.58);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:900; letter-spacing:.2px;
+      text-decoration:none;
+    }
+    .logo{
+      width:14px;height:14px;border-radius:50%;
+      background: linear-gradient(135deg,var(--a),var(--b));
+      box-shadow: 0 0 26px rgba(124,58,237,.55);
+    }
+    .nav-links{
+      display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13.5px;
+    }
+    .nav-links a:hover{color:var(--text)}
+    .pill{
+      padding:10px 12px;border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    /* HERO */
+    .hero{padding:64px 0 18px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 940px){ .hero-grid{grid-template-columns:1fr} }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--r2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-left{padding:28px}
+    .badge{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;border-radius:999px;
+      background: rgba(34,211,238,.10);
+      border:1px solid rgba(34,211,238,.20);
+      font-weight:800;font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+    .badge i{
+      width:8px;height:8px;border-radius:999px;
+      background: var(--b);
+      display:inline-block;
+      box-shadow:0 0 18px rgba(34,211,238,.7);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:56px;
+      line-height:1.02;
+      letter-spacing:-1.2px;
+    }
+    @media (max-width: 520px){ h1{font-size:42px} }
+
+    .grad{
+      background: linear-gradient(90deg, #fff, rgba(255,255,255,.74), rgba(255,255,255,.98));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16.5px;
+      line-height:1.6;
+      max-width:64ch;
+    }
+    .cta{
+      margin-top:18px;
+      display:flex;flex-wrap:wrap;gap:10px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:14px;
+      text-decoration:none;
+      font-weight:900;font-size:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn:hover{transform: translateY(-2px);background: rgba(255,255,255,.09);border-color: rgba(255,255,255,.20)}
+    .btn-primary{
+      border:none;
+      background: linear-gradient(135deg,var(--a),var(--b));
+      color:#071018;
+      box-shadow: 0 18px 44px rgba(124,58,237,.22);
+    }
+    .btn-primary:hover{transform: translateY(-3px)}
+    .chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}
+    .chip{
+      padding:10px 12px;border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+
+    /* RIGHT HERO */
+    .hero-right{padding:18px;display:grid;gap:12px}
+    .mini{
+      border-radius:18px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .mini::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 240px at 20% 0%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(700px 260px at 80% 0%, rgba(124,58,237,.16), transparent 60%);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .mini > *{position:relative}
+    .mini h3{margin:0 0 6px;font-size:14px;letter-spacing:.2px}
+    .mini p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+    .stat{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+    .big{font-size:24px;font-weight:1000;letter-spacing:-.5px}
+    .small{color:var(--muted2);font-weight:800;font-size:12.5px}
+
+    /* SECTIONS */
+    section{padding:34px 0}
+    .section-head{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:14px;
+      margin:0 0 14px;
+    }
+    .section-head h2{margin:0;font-size:28px;letter-spacing:-.6px}
+    .section-head p{margin:0;color:var(--muted);font-weight:700}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width: 980px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 640px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding:18px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      position:relative;
+      overflow:hidden;
+      min-height: 150px;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 220px at 25% 0%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(700px 220px at 80% 0%, rgba(124,58,237,.16), transparent 60%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.18);
+    }
+    .card > *{position:relative}
+    .card h3{margin:0 0 6px;font-size:16px;letter-spacing:-.2px}
+    .card p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+    .meta{margin-top:10px;color:rgba(255,255,255,.72);font-weight:900;font-size:12.5px}
+    .inline{
+      display:inline-flex;gap:8px;align-items:center;
+      margin-top:12px;
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+      text-decoration:none;
+    }
+    .inline:hover{color:#fff}
+
+    /* Writing list */
+    .writing{
+      display:grid; gap:10px;
+    }
+    .post{
+      display:flex; justify-content:space-between; gap:14px; align-items:flex-start;
+      padding:16px;
+      border-radius:18px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .post:hover{transform: translateY(-3px); border-color: rgba(255,255,255,.18)}
+    .post h3{margin:0 0 6px;font-size:16px}
+    .post p{margin:0;color:var(--muted);line-height:1.55;font-size:13.5px}
+    .date{color:var(--muted2);font-weight:900;font-size:12.5px;white-space:nowrap}
+
+    /* Subscribe box (no backend; just UI) */
+    .subscribe{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+      padding:16px;border-radius:18px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .subscribe input{
+      flex:1;
+      min-width:220px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+      font-weight:700;
+    }
+    .subscribe input::placeholder{color:rgba(255,255,255,.45)}
+    .note{margin-top:8px;color:var(--muted2);font-size:12.5px;font-weight:700}
+
+    /* Footer */
+    footer{
+      padding:44px 0 70px;
+      text-align:center;
+      color:rgba(255,255,255,.55);
+      font-weight:800;
+    }
+
+    /* Animations */
+    .fade{opacity:0; transform: translateY(14px); animation: up .65s ease forwards}
+    .d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}
+    @keyframes up{to{opacity:1; transform:none}}
+  </style>
 </head>
+
 <body>
-<div class="container">
+  <div class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top"><span class="logo"></span> Adam Almaktari</a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="pill">Contact</a>
+      </div>
+    </div>
+  </div>
 
-<h1>Adam Almaktari</h1>
-<div class="subtitle">Computer Science @ NYU · IT Co-Head (HESS) · Java · Data Structures · Business-Driven Builder</div>
+  <div id="top" class="container hero">
+    <div class="hero-grid">
+      <div class="panel hero-left">
+        <div class="badge fade d1"><i></i> CS @ NYU • Leadership • Builder</div>
 
-<div class="links">
-<a href="mailto:aa12255@nyu.edu">Email</a>
-<a href="https://www.linkedin.com/in/adam-almaktari-390022351/">LinkedIn</a>
-<a href="https://github.com/adam-a11">GitHub</a>
-</div>
+        <h1 class="fade d2"><span class="grad">Cool work,</span><br/>clean execution.</h1>
 
-<div class="section">
-<h2>Projects</h2>
+        <p class="sub fade d3">
+          I’m Adam — an NYU Computer Science student who combines <b>engineering fundamentals</b>
+          (Java + data structures) with <b>real-world ops</b> and leadership (IT Co-Head at HESS).
+          This site is a quick scan of what I build and what I’m learning.
+        </p>
 
-<div class="card">
-<h3>Data Structures Toolkit</h3>
-<p>Custom implementations of linked lists, stacks, queues, trees and hash tables in Java with complexity analysis and edge-case validation.</p>
-<span class="tag">Java</span><span class="tag">OOP</span><span class="tag">Algorithms</span>
-<br><br>
-<a href="https://github.com/adam-a11/data-structures-projects" style="color:#38bdf8">View Code →</a>
-</div>
+        <div class="cta fade d4">
+          <a class="btn btn-primary" href="resume.pdf" target="_blank">Resume ↗</a>
+          <a class="btn" href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank">LinkedIn ↗</a>
+          <a class="btn" href="https://github.com/adam-a11" target="_blank">GitHub ↗</a>
+          <a class="btn" href="https://github.com/adam-a11/data-structures-projects" target="_blank">DS Repo ↗</a>
+        </div>
 
-</div>
+        <div class="chips fade d4">
+          <span class="chip">Java • Python</span>
+          <span class="chip">Data Structures</span>
+          <span class="chip">Git/GitHub</span>
+          <span class="chip">IT Ops + Documentation</span>
+          <span class="chip">NYU • Expected 2028</span>
+        </div>
+      </div>
 
-<div class="section">
-<h2>Leadership</h2>
-<div class="card">
-<h3>IT Co-Head — HESS @ NYU</h3>
-<p>Lead infrastructure operations for 50+ engineers, reducing tech issues by 30% through standardized documentation and onboarding systems.</p>
-<span class="tag">Leadership</span><span class="tag">Operations</span>
-</div>
-</div>
+      <div class="panel hero-right">
+        <div class="mini">
+          <div class="stat">
+            <div>
+              <div class="big">NYU</div>
+              <div class="small">Computer Science (B.A.)</div>
+            </div>
+            <div class="small">Expected 2028</div>
+          </div>
+        </div>
 
-<div class="section">
-<h2>Resume</h2>
-<div class="card">
-<a href="resume.pdf" style="color:#38bdf8;font-size:18px;">Download Resume →</a>
-</div>
-</div>
+        <div class="mini">
+          <h3>What I’m building</h3>
+          <p>Stronger projects, better documentation, and a portfolio that feels like a real engineer shipped it.</p>
+        </div>
 
-<footer>
-© 2025 Adam Almaktari · Built with GitHub Pages
-</footer>
+        <div class="mini">
+          <h3>How I work</h3>
+          <p>I like clean structure, clear writing, and systems that don’t break when real people use them.</p>
+        </div>
 
-</div>
+        <div class="mini">
+          <h3>Fast contact</h3>
+          <p><a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>Clickable proof.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Data Structures Projects (Java)</h3>
+          <p>Core DS implementations (lists, stacks, queues, trees, hashing) with correctness + complexity thinking.</p>
+          <div class="meta">Java • OOP • Edge cases</div>
+          <a class="inline" href="https://github.com/adam-a11/data-structures-projects" target="_blank">View repo ↗</a>
+        </div>
+
+        <div class="card">
+          <h3>Postfix Calculator</h3>
+          <p>Parser + stack-based evaluation with clean separation of components and a simple CLI.</p>
+          <div class="meta">Stacks • Parsing • Java</div>
+          <a class="inline" href="https://github.com/adam-a11/data-structures-projects" target="_blank">In DS repo ↗</a>
+        </div>
+
+        <div class="card">
+          <h3>Linked List Album System</h3>
+          <p>Custom linked list behavior to model photos/albums with sample I/O validation and edge-case handling.</p>
+          <div class="meta">Linked Lists • CRUD • Testing mindset</div>
+          <a class="inline" href="https://github.com/adam-a11/data-structures-projects" target="_blank">In DS repo ↗</a>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; color: var(--muted2); font-weight:800; font-size:12.5px;">
+        Next upgrade (we’ll do it after): add screenshots + “Project details” pages.
+      </div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="container">
+      <div class="section-head">
+        <h2>Writing</h2>
+        <p>Ideas I’m exploring (like your friend’s vibe).</p>
+      </div>
+
+      <div class="subscribe">
+        <input id="email" type="email" placeholder="Your email (optional)" />
+        <button class="btn btn-primary" onclick="fakeSubscribe()">Subscribe</button>
+        <a class="btn" href="#contact">Contact ↘</a>
+      </div>
+      <div class="note" id="subNote">
+        This is a front-end demo (no email backend yet). If you want real subscribers, we’ll connect Buttondown/Substack/Mailchimp later.
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="writing">
+        <div class="post">
+          <div>
+            <h3>What “good documentation” looks like for student engineers</h3>
+            <p>How to make your projects easy to understand, review, and trust — even if you’re early in CS.</p>
+          </div>
+          <div class="date">2025-12-26</div>
+        </div>
+
+        <div class="post">
+          <div>
+            <h3>Why data structures made me a better problem solver</h3>
+            <p>Not just algorithms — it’s how you think about tradeoffs, constraints, and clean design.</p>
+          </div>
+          <div class="date">2025-12-15</div>
+        </div>
+
+        <div class="post">
+          <div>
+            <h3>CS + operations: the underrated combo</h3>
+            <p>How running systems (events, tools, workflows) builds real skills employers actually notice.</p>
+          </div>
+          <div class="date">2025-11-30</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <h2>About</h2>
+        <p>Short, confident, and real.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>My angle</h3>
+          <p>
+            I’m building into software engineering, but I don’t ignore business/ops — I like the part where systems meet real people.
+          </p>
+          <div class="meta">CS + Leadership</div>
+        </div>
+
+        <div class="card">
+          <h3>What I’m improving</h3>
+          <p>
+            More impressive projects (with clear READMEs), stronger technical depth, and a public portfolio that looks legit.
+          </p>
+          <div class="meta">Projects • Story • Consistency</div>
+        </div>
+
+        <div class="card">
+          <h3>What I want next</h3>
+          <p>
+            Internships where I can ship features, learn from a team, and grow fast — especially backend/product engineering.
+          </p>
+          <div class="meta">Internship-ready focus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Simple + clean.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Email</h3>
+          <p><a class="inline" href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
+          <div class="meta">Best for internship outreach</div>
+        </div>
+
+        <div class="card">
+          <h3>LinkedIn</h3>
+          <p><a class="inline" href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank">linkedin.com/in/adam-almaktari</a></p>
+          <div class="meta">Recruiter-friendly profile</div>
+        </div>
+
+        <div class="card">
+          <h3>GitHub</h3>
+          <p><a class="inline" href="https://github.com/adam-a11" target="_blank">github.com/adam-a11</a></p>
+          <div class="meta">Projects + code</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    © 2025 Adam Almaktari — built with HTML/CSS (fast + clean + yours)
+  </footer>
+
+  <script>
+    function fakeSubscribe(){
+      const v = document.getElementById('email').value.trim();
+      const note = document.getElementById('subNote');
+      if(!v){
+        note.textContent = "Subscribed (demo). If you want real subscribers, we’ll connect an email service later.";
+        return;
+      }
+      note.textContent = `Subscribed (demo) with: ${v} — We’ll add a real email backend when you’re ready.`;
+    }
+  </script>
 </body>
 </html>
 
