@@ -1,560 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Adam Almaktari — CS @ NYU</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <title>Adam Almaktari</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg0:#05060b;
-      --bg1:#070a14;
-      --panel:rgba(255,255,255,.06);
-      --panel2:rgba(255,255,255,.09);
-      --border:rgba(255,255,255,.12);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.68);
-      --muted2:rgba(255,255,255,.52);
-      --a:#7c3aed;   /* purple */
-      --b:#22d3ee;   /* cyan */
-      --c:#a3ff12;   /* lime */
-      --shadow: 0 18px 70px rgba(0,0,0,.58);
-      --r:18px;
-      --r2:24px;
-      --max:1120px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 12% 10%, rgba(124,58,237,.34), transparent 62%),
-        radial-gradient(950px 700px at 88% 20%, rgba(34,211,238,.22), transparent 55%),
-        radial-gradient(900px 700px at 50% 88%, rgba(163,255,18,.10), transparent 60%),
-        linear-gradient(180deg,var(--bg0),var(--bg1));
-      overflow-x:hidden;
+      font-family:Inter,system-ui,sans-serif;
+      background:#0b0b10;
+      color:#fff;
+      line-height:1.6;
     }
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:.14;
-      mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+    a{color:#4f9cff;text-decoration:none}
+    .container{max-width:980px;margin:auto;padding:48px 20px}
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+      border-bottom:1px solid #1f1f2a;
     }
-    a{color:inherit}
-    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
+    nav a{margin-left:20px;color:#bbb;font-weight:600}
+    nav a:hover{color:#fff}
 
-    /* NAV */
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(5,6,11,.62);
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .hero{padding:80px 0}
+    .hero h1{font-size:52px;line-height:1.1;margin-bottom:20px}
+    .hero p{color:#aaa;max-width:620px;font-size:18px}
+    .hero .buttons a{
+      display:inline-block;
+      padding:12px 18px;
+      border:1px solid #2a2a36;
+      border-radius:10px;
+      margin-right:12px;
+      margin-top:16px;
+      font-weight:600;
     }
-    .nav-inner{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 0;
-      gap:12px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      font-weight:900; letter-spacing:.2px;
-      text-decoration:none;
-    }
-    .logo{
-      width:14px;height:14px;border-radius:50%;
-      background: linear-gradient(135deg,var(--a),var(--b));
-      box-shadow: 0 0 26px rgba(124,58,237,.55);
-    }
-    .nav-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
-    .nav-links a{
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:800;
-      font-size:13.5px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid transparent;
-    }
-    .nav-links a:hover{color:var(--text);border-color:rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
-    .kbd{
-      display:inline-flex;align-items:center;gap:8px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      padding:8px 10px;border-radius:999px;
-      color:rgba(255,255,255,.80);
-      font-weight:900;font-size:13px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .kbd small{
-      opacity:.75;font-weight:900;
-      border:1px solid rgba(255,255,255,.18);
-      padding:2px 6px;border-radius:8px;
-      background: rgba(0,0,0,.20);
-    }
-
-    /* HERO */
-    .hero{padding:62px 0 18px}
-    .hero-grid{display:grid;grid-template-columns: 1.2fr .8fr;gap:16px;align-items:stretch}
-    @media (max-width: 940px){ .hero-grid{grid-template-columns:1fr} }
-
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: var(--r2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-left{padding:28px}
-    .badge{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 12px;border-radius:999px;
-      background: rgba(34,211,238,.10);
-      border:1px solid rgba(34,211,238,.20);
-      font-weight:900;font-size:13px;
-      color:rgba(255,255,255,.86);
-    }
-    .badge i{width:8px;height:8px;border-radius:999px;background:var(--b);display:inline-block;box-shadow:0 0 18px rgba(34,211,238,.7)}
-    h1{margin:14px 0 10px;font-size:56px;line-height:1.02;letter-spacing:-1.1px}
-    @media (max-width: 520px){ h1{font-size:42px} }
-    .grad{
-      background: linear-gradient(90deg, #fff, rgba(255,255,255,.74), rgba(255,255,255,.98));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .sub{margin:0;color:var(--muted);font-size:16.5px;line-height:1.6;max-width:66ch}
-    .cta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:12px 14px;border-radius:14px;
-      text-decoration:none;
-      font-weight:900;font-size:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-    }
-    .btn:hover{transform: translateY(-2px);background: rgba(255,255,255,.09);border-color: rgba(255,255,255,.20)}
-    .btn-primary{
+    .hero .buttons a.primary{
+      background:#4f9cff;
+      color:#000;
       border:none;
-      background: linear-gradient(135deg,var(--a),var(--b));
-      color:#071018;
-      box-shadow: 0 18px 44px rgba(124,58,237,.22);
-    }
-    .btn-primary:hover{transform: translateY(-3px)}
-    .chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}
-    .chip{
-      padding:10px 12px;border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color:var(--muted);
-      font-weight:900;
-      font-size:13px;
     }
 
-    /* RIGHT HERO */
-    .hero-right{padding:18px;display:grid;gap:12px}
-    .mini{
-      border-radius:18px;
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
-      padding:16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .mini::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(600px 240px at 20% 0%, rgba(34,211,238,.14), transparent 60%),
-        radial-gradient(700px 260px at 80% 0%, rgba(124,58,237,.16), transparent 60%);
-      opacity:.85;
-      pointer-events:none;
-    }
-    .mini > *{position:relative}
-    .mini h3{margin:0 0 6px;font-size:14px;letter-spacing:.2px}
-    .mini p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
-    .stat{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
-    .big{font-size:24px;font-weight:1000;letter-spacing:-.5px}
-    .small{color:var(--muted2);font-weight:900;font-size:12.5px}
+    section{margin-top:90px}
+    h2{font-size:28px;margin-bottom:20px}
 
-    /* SECTIONS */
-    section{padding:34px 0}
-    .section-head{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:14px;
-      margin:0 0 14px;
-    }
-    .section-head h2{margin:0;font-size:28px;letter-spacing:-.6px}
-    .section-head p{margin:0;color:var(--muted);font-weight:800}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media (max-width: 980px){ .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width: 640px){ .grid{grid-template-columns:1fr} }
-
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
     .card{
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      padding:18px;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      position:relative;
-      overflow:hidden;
-      min-height: 160px;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(700px 220px at 25% 0%, rgba(34,211,238,.14), transparent 60%),
-        radial-gradient(700px 220px at 80% 0%, rgba(124,58,237,.16), transparent 60%);
-      opacity:.85;
-      pointer-events:none;
-    }
-    .card:hover{transform: translateY(-6px);background: rgba(255,255,255,.07);border-color: rgba(255,255,255,.18)}
-    .card > *{position:relative}
-    .card h3{margin:0 0 6px;font-size:16px;letter-spacing:-.2px}
-    .card p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
-    .meta{margin-top:10px;color:rgba(255,255,255,.72);font-weight:900;font-size:12.5px}
-    .inline{
-      display:inline-flex;gap:8px;align-items:center;
-      margin-top:12px;
-      color:rgba(255,255,255,.92);
-      font-weight:900;
-      text-decoration:none;
-    }
-    .inline:hover{color:#fff}
-
-    /* Writing list */
-    .writing{display:grid;gap:10px}
-    .post{
-      display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
-      padding:16px;border-radius:18px;
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
-      transition: transform .18s ease, border-color .18s ease;
-    }
-    .post:hover{transform: translateY(-3px); border-color: rgba(255,255,255,.18)}
-    .post h3{margin:0 0 6px;font-size:16px}
-    .post p{margin:0;color:var(--muted);line-height:1.55;font-size:13.5px}
-    .date{color:var(--muted2);font-weight:900;font-size:12.5px;white-space:nowrap}
-
-    /* Command palette */
-    .overlay{
-      position:fixed; inset:0; display:none;
-      background: rgba(0,0,0,.55);
-      z-index:200;
+      border:1px solid #1f1f2a;
+      border-radius:16px;
       padding:22px;
+      background:#0f0f16;
     }
-    .palette{
-      max-width:700px;margin:9vh auto 0;
-      background: rgba(10,12,22,.88);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:22px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
-      overflow:hidden;
-      backdrop-filter: blur(18px);
-    }
-    .palette-top{padding:14px 14px 10px;border-bottom:1px solid rgba(255,255,255,.10)}
-    .palette-top input{
-      width:100%;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      outline:none;
-      font-weight:800;
-    }
-    .palette-top input::placeholder{color:rgba(255,255,255,.45)}
-    .palette-list{padding:8px}
-    .cmd{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:12px 12px;border-radius:14px;
-      border:1px solid transparent;
-      cursor:pointer;
-    }
-    .cmd:hover{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
-    .cmd strong{font-weight:1000}
-    .cmd span{color:var(--muted);font-weight:900;font-size:12.5px}
+    .card h3{margin-top:0}
+    .muted{color:#aaa;font-size:14px}
 
-    footer{padding:44px 0 70px;text-align:center;color:rgba(255,255,255,.55);font-weight:900}
-
-    .fade{opacity:0;transform: translateY(14px);animation: up .65s ease forwards}
-    .d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}
-    @keyframes up{to{opacity:1;transform:none}}
+    footer{
+      text-align:center;
+      padding:60px 20px;
+      color:#666;
+      font-size:14px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#top"><span class="logo"></span> Adam Almaktari</a>
 
-      <div class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#writing">Writing</a>
-        <a href="#contact">Contact</a>
-        <div class="kbd" onclick="openPalette()" title="Open command palette">
-          ⌘K <small>Menu</small>
-        </div>
-      </div>
+<div class="container">
+
+<header>
+  <strong>Adam Almaktari</strong>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Building clean systems that<br>actually work.</h1>
+  <p>
+    I’m a Computer Science student at NYU focused on engineering fundamentals, real-world systems,
+    and leadership through technology.
+  </p>
+  <div class="buttons">
+    <a class="primary" href="resume.pdf" target="_blank">Resume</a>
+    <a href="https://github.com/adam-a11" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Data Structures in Java</h3>
+      <p>Stacks, queues, linked lists, trees, and postfix expression parsing with clean design.</p>
+      <p class="muted">Java · OOP · Parsing</p>
+    </div>
+    <div class="card">
+      <h3>Postfix Calculator</h3>
+      <p>CLI tool converting infix expressions to postfix and evaluating them using stacks.</p>
+      <p class="muted">Stacks · Algorithms</p>
     </div>
   </div>
+</section>
 
-  <div id="top" class="container hero">
-    <div class="hero-grid">
-      <div class="panel hero-left">
-        <div class="badge fade d1"><i></i> CS @ NYU • IT Co-Head (HESS) • Builder</div>
-
-        <h1 class="fade d2"><span class="grad">Software</span> with<br/>real-world execution.</h1>
-
-        <p class="sub fade d3">
-          I’m Adam — an NYU Computer Science student focused on <b>engineering fundamentals</b>
-          (Java + data structures) and <b>leadership + ops</b> (IT Co-Head at HESS).
-          This site is a fast, recruiter-friendly scan of what I ship.
-        </p>
-
-        <div class="cta fade d4">
-          <a class="btn btn-primary" href="resume.pdf?v=2" target="_blank" rel="noopener">Resume ↗</a>
-          <a class="btn" href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener">LinkedIn ↗</a>
-          <a class="btn" href="https://github.com/adam-a11" target="_blank" rel="noopener">GitHub ↗</a>
-          <a class="btn" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">DS Repo ↗</a>
-        </div>
-
-        <div class="chips fade d4">
-          <span class="chip">Java • Python</span>
-          <span class="chip">Data Structures</span>
-          <span class="chip">Git/GitHub</span>
-          <span class="chip">Documentation + Systems</span>
-          <span class="chip">NYU • Expected 2028</span>
-        </div>
-      </div>
-
-      <div class="panel hero-right">
-        <div class="mini">
-          <div class="stat">
-            <div>
-              <div class="big">NYU</div>
-              <div class="small">Computer Science</div>
-            </div>
-            <div class="small">Expected 2028</div>
-          </div>
-        </div>
-
-        <div class="mini">
-          <h3>What I’m optimizing</h3>
-          <p>Projects that look legit: clean README, clear results, and code that’s easy to review.</p>
-        </div>
-
-        <div class="mini">
-          <h3>My edge</h3>
-          <p>CS + ops: I can build it, document it, and run the system around it.</p>
-        </div>
-
-        <div class="mini">
-          <h3>Fast contact</h3>
-          <p><a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
-        </div>
-      </div>
-    </div>
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="card">
+    <h3>IT Co-Head — Hemmes Engineering & Science Society (HESS)</h3>
+    <p class="muted">NYU · 2025–Present</p>
+    <ul>
+      <li>Manage IT systems and documentation for engineering society operations.</li>
+      <li>Support technical workflows and improve internal tools.</li>
+    </ul>
   </div>
+</section>
 
-  <section id="projects">
-    <div class="container">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <p>Clickable proof.</p>
-      </div>
+<section id="about">
+  <h2>About</h2>
+  <p class="muted">
+    I’m passionate about building strong foundations in computer science while learning how technology
+    supports real organizations. I enjoy combining engineering with leadership, operations, and strategy.
+  </p>
+</section>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Data Structures Projects (Java)</h3>
-          <p>Core implementations + correctness mindset (edge cases, complexity tradeoffs, clean OOP structure).</p>
-          <div class="meta">Java • OOP • DS fundamentals</div>
-          <a class="inline" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">View repo ↗</a>
-        </div>
-
-        <div class="card">
-          <h3>Postfix Calculator</h3>
-          <p>Stack-based conversion + evaluation with a simple CLI and separation of concerns.</p>
-          <div class="meta">Stacks • Parsing • Java</div>
-          <a class="inline" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">In DS repo ↗</a>
-        </div>
-
-        <div class="card">
-          <h3>Linked List Album System</h3>
-          <p>Custom linked list behavior modeling albums/photos with sample I/O and edge-case handling.</p>
-          <div class="meta">Linked Lists • CRUD • Testing mindset</div>
-          <a class="inline" href="https://github.com/adam-a11/data-structures-projects" target="_blank" rel="noopener">In DS repo ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="container">
-      <div class="section-head">
-        <h2>Experience</h2>
-        <p>Leadership + execution.</p>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>IT Co-Head — HESS (NYU)</h3>
-          <p>Support club systems + tooling. Set up workflows that keep events/ops running smoothly.</p>
-          <div class="meta">IT Ops • Documentation • Reliability</div>
-        </div>
-
-        <div class="card">
-          <h3>Operations Experience</h3>
-          <p>Hands-on roles that built discipline: delivering consistent outcomes, communicating clearly, and improving processes.</p>
-          <div class="meta">Execution • Teamwork • Systems thinking</div>
-        </div>
-
-        <div class="card">
-          <h3>What I’m targeting</h3>
-          <p>Internships where I can ship features, learn fast, and grow toward backend/product engineering.</p>
-          <div class="meta">Internship focus • Growth mindset</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="writing">
-    <div class="container">
-      <div class="section-head">
-        <h2>Writing</h2>
-        <p>Option 3: ideas + learnings.</p>
-      </div>
-
-      <div class="writing">
-        <div class="post">
-          <div>
-            <h3>How to make student projects look “internship-ready”</h3>
-            <p>README structure, screenshots, and the exact details recruiters scan for.</p>
-          </div>
-          <div class="date">2025-12-27</div>
-        </div>
-
-        <div class="post">
-          <div>
-            <h3>Why data structures changed how I think</h3>
-            <p>Tradeoffs, constraints, and designing clean systems.</p>
-          </div>
-          <div class="date">2025-12-15</div>
-        </div>
-
-        <div class="post">
-          <div>
-            <h3>CS + ops is underrated</h3>
-            <p>Running systems teaches habits that transfer directly into engineering.</p>
-          </div>
-          <div class="date">2025-11-30</div>
-        </div>
-      </div>
-
-      <div style="margin-top:12px;color:var(--muted2);font-weight:900;font-size:12.5px;">
-        (We can turn this into real blog posts later — still looks impressive now.)
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="section-head">
-        <h2>Contact</h2>
-        <p>Simple + clean.</p>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>Email</h3>
-          <p><a class="inline" href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
-          <div class="meta">Best for internship outreach</div>
-        </div>
-
-        <div class="card">
-          <h3>LinkedIn</h3>
-          <p><a class="inline" href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener">linkedin.com/in/adam-almaktari</a></p>
-          <div class="meta">Recruiter-friendly</div>
-        </div>
-
-        <div class="card">
-          <h3>GitHub</h3>
-          <p><a class="inline" href="https://github.com/adam-a11" target="_blank" rel="noopener">github.com/adam-a11</a></p>
-          <div class="meta">Projects + code</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="container">
-    © 2025 Adam Almaktari — built fast, clean, and custom
-  </footer>
-
-  <!-- Command palette -->
-  <div class="overlay" id="overlay" onclick="closePalette(event)">
-    <div class="palette" onclick="event.stopPropagation()">
-      <div class="palette-top">
-        <input id="cmdSearch" placeholder="Jump to… (Projects, Experience, Resume, LinkedIn)" />
-      </div>
-      <div class="palette-list" id="cmdList"></div>
-    </div>
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="card">
+    <p>Email: <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank">linkedin.com/in/adam-almaktari</a></p>
   </div>
+</section>
 
-  <script>
-    const commands = [
-      {name:"Projects", hint:"#projects", action:()=>location.hash="#projects"},
-      {name:"Experience", hint:"#experience", action:()=>location.hash="#experience"},
-      {name:"Writing", hint:"#writing", action:()=>location.hash="#writing"},
-      {name:"Contact", hint:"#contact", action:()=>location.hash="#contact"},
-      {name:"Open Resume", hint:"resume.pdf", action:()=>window.open("resume.pdf?v=2","_blank")},
-      {name:"LinkedIn", hint:"external", action:()=>window.open("https://www.linkedin.com/in/adam-almaktari-390022351/","_blank")},
-      {name:"GitHub", hint:"external", action:()=>window.open("https://github.com/adam-a11","_blank")},
-      {name:"DS Repo", hint:"external", action:()=>window.open("https://github.com/adam-a11/data-structures-projects","_blank")},
-    ];
+<footer>
+  © 2025 Adam Almaktari
+</footer>
 
-    const overlay = document.getElementById("overlay");
-    const list = document.getElementById("cmdList");
-    const search = document.getElementById("cmdSearch");
-
-    function render(filter=""){
-      list.innerHTML = "";
-      const f = filter.trim().toLowerCase();
-      const items = commands.filter(c => c.name.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f));
-      items.forEach(c=>{
-        const row = document.createElement("div");
-        row.className = "cmd";
-        row.innerHTML = `<div><strong>${c.name}</strong></div><span>${c.hint}</span>`;
-        row.onclick = ()=>{ c.action(); closePalette(); };
-        list.appendChild(row);
-      });
-    }
-
-    function openPalette(){
-      overlay.style.display = "block";
-      render("");
-      search.value = "";
-      setTimeout(()=>search.focus(), 30);
-    }
-    function closePalette(e){
-      overlay.style.display = "none";
-    }
-    search.addEventListener("input", ()=>render(search.value));
-    document.addEventListener("keydown", (e)=>{
-      const isMac = navigator.platform.toUpperCase().includes("MAC");
-      const cmdk = (isMac && e.metaKey && e.key.toLowerCase()==="k") || (!isMac && e.ctrlKey && e.key.toLowerCase()==="k");
-      if(cmdk){ e.preventDefault(); openPalette(); }
-      if(e.key==="Escape" && overlay.style.display==="block"){ closePalette(); }
-    });
-  </script>
+</div>
 </body>
 </html>
 
