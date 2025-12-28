@@ -16,9 +16,10 @@
       --surface: #111111;
       --border: #1a1a1a;
       --text: #e5e5e5;
-      --text-muted: #a0a0a0;
+      --text-muted: #888888;
       --accent: #ffffff;
-      --hover: #2a2a2a;
+      --hover: #1a1a1a;
+      --link: #888888;
     }
 
     html {
@@ -36,59 +37,58 @@
     }
 
     .container {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: 100px 24px;
     }
 
     /* Hero Section */
     .hero {
-      margin-bottom: 120px;
+      margin-bottom: 100px;
+    }
+
+    .hero-intro {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-weight: 500;
     }
 
     .hero h1 {
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 600;
-      line-height: 1.2;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
       margin-bottom: 24px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       color: var(--accent);
     }
 
-    .hero p {
-      font-size: 18px;
+    .hero-tagline {
+      font-size: 20px;
       color: var(--text-muted);
       margin-bottom: 32px;
+      line-height: 1.6;
       max-width: 600px;
-      line-height: 1.7;
     }
 
-    .button-group {
+    .hero-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 40px;
+      gap: 24px;
+      margin-top: 32px;
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: transparent;
+    .hero-links a {
       color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 6px;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      cursor: pointer;
+      font-size: 15px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+      padding-bottom: 2px;
     }
 
-    .button:hover {
-      background-color: var(--hover);
-      border-color: var(--text-muted);
-      transform: translateY(-1px);
+    .hero-links a:hover {
+      border-bottom-color: var(--text-muted);
     }
 
     /* Section Styling */
@@ -101,11 +101,116 @@
     }
 
     h2 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       margin-bottom: 32px;
       color: var(--accent);
       letter-spacing: -0.01em;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    /* At a Glance */
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .glance-item h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .glance-item p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .glance-item .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .glance-item .tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      background-color: var(--surface);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* Experience */
+    .experience-item {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .experience-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .experience-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .experience-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1.3;
+    }
+
+    .experience-company {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .experience-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .experience-item ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .experience-item li {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .experience-item li:before {
+      content: '•';
+      position: absolute;
+      left: 8px;
+      color: var(--text-muted);
+    }
+
+    .experience-item li:last-child {
+      margin-bottom: 0;
     }
 
     /* Projects */
@@ -120,7 +225,6 @@
 
     .project-card:hover {
       border-color: var(--text-muted);
-      transform: translateY(-2px);
     }
 
     .project-card:last-child {
@@ -140,58 +244,125 @@
       line-height: 1.6;
     }
 
-    /* Experience */
-    .experience-item {
+    .project-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 12px;
+    }
+
+    .project-card li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .project-card li:before {
+      content: '•';
+      position: absolute;
+      left: 6px;
+      color: var(--text-muted);
+    }
+
+    /* Education */
+    .education-item {
       margin-bottom: 32px;
     }
 
-    .experience-item:last-child {
+    .education-item:last-child {
       margin-bottom: 0;
     }
 
-    .experience-item h3 {
+    .education-title {
       font-size: 18px;
       font-weight: 600;
-      margin-bottom: 12px;
       color: var(--accent);
+      margin-bottom: 8px;
     }
 
-    .experience-item ul {
+    .education-meta {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .education-item ul {
       list-style: none;
       padding-left: 0;
     }
 
-    .experience-item li {
+    .education-item li {
       font-size: 15px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-      padding-left: 20px;
+      color: var(--text);
+      margin-bottom: 6px;
+      padding-left: 16px;
       position: relative;
     }
 
-    .experience-item li:before {
-      content: '—';
+    .education-item li:before {
+      content: '•';
       position: absolute;
-      left: 0;
+      left: 6px;
       color: var(--text-muted);
     }
 
-    .experience-item li:last-child {
-      margin-bottom: 0;
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 12px;
+    }
+
+    .skill-category p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
     }
 
     /* About */
     .about p {
       font-size: 16px;
-      color: var(--text-muted);
+      color: var(--text);
       line-height: 1.8;
-      max-width: 600px;
+      margin-bottom: 16px;
+    }
+
+    .about p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Top Skills */
+    .top-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .top-skill {
+      font-size: 14px;
+      color: var(--text);
+      background-color: var(--surface);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
     }
 
     /* Contact */
     .contact p {
       font-size: 15px;
-      color: var(--text-muted);
+      color: var(--text);
       margin-bottom: 12px;
     }
 
@@ -221,20 +392,24 @@
       }
 
       .hero h1 {
-        font-size: 32px;
+        font-size: 36px;
       }
 
-      .hero p {
-        font-size: 16px;
+      .hero-tagline {
+        font-size: 18px;
       }
 
-      .button-group {
+      .glance-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-header {
         flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-        justify-content: center;
       }
     }
   </style>
@@ -243,12 +418,164 @@
   <div class="container">
     <!-- Hero Section -->
     <section class="hero">
+      <div class="hero-intro">I'm Adam Almaktari</div>
       <h1>Building clean systems that actually work.</h1>
-      <p>Computer Science student at NYU focused on engineering fundamentals, data structures, and building real-world systems through leadership and operations.</p>
-      <div class="button-group">
-        <a href="resume.pdf" class="button" target="_blank">Resume</a>
-        <a href="https://github.com/adam-a11" class="button" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" class="button" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <p class="hero-tagline">CS & Math @ NYU. I take pleasure in both constructing things and figuring out how systems function—not only from the technical side but also in practice.</p>
+      <div class="hero-links">
+        <a href="resume.pdf" target="_blank">Get Resume</a>
+        <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+
+    <!-- At a Glance -->
+    <section class="glance">
+      <h2>At a Glance</h2>
+      <div class="glance-grid">
+        <div class="glance-item">
+          <h3>Location</h3>
+          <p>New York, NY</p>
+        </div>
+        <div class="glance-item">
+          <h3>Education</h3>
+          <p>NYU • CS & Math • Expected 2028</p>
+        </div>
+        <div class="glance-item">
+          <h3>Stacks</h3>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+        <div class="glance-item">
+          <h3>Top Skills</h3>
+          <div class="top-skills">
+            <span class="top-skill">High-Performance Discipline</span>
+            <span class="top-skill">Team Coordination</span>
+            <span class="top-skill">Performance Accountability</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>About</h2>
+      <div class="about">
+        <p>I am studying CS and Math at NYU, and I take pleasure in both constructing things and figuring out how systems function, not only from the technical side but also in practice. The truth is that I am heavily fascinated by AI and the idea of solving problems by means of software. Apart from that, I like to learn how concepts turn into actual products and platforms.</p>
+        <p>Alongside my technical fascination, I have been involved in different business settings such as early-stage startups, the food industry, healthcare, real estate, and the hospitality sector. These experiences have significantly contributed to my understanding of the issues of execution, structure, and scale, which I now perceive as going beyond the classroom.</p>
+        <p>I am mostly attracted to the fusion of computer science and business, where robust engineering is the backbone for real-life applications and long-term value.</p>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2>Experience</h2>
+      
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">IT Co-Head</div>
+          <div class="experience-company">Hemmes Engineering & Science Society (HESS)</div>
+        </div>
+        <div class="experience-meta">Sep 2025 – Present • New York, NY</div>
+        <ul>
+          <li>Led IT operations for a multidisciplinary engineering society supporting 50+ active members, ensuring reliable systems for meetings, workshops, and internal coordination</li>
+          <li>Reduced recurring technical issues by 30% by creating centralized documentation, standardized troubleshooting workflows, and structured access controls</li>
+          <li>Supported 5+ large-scale events per semester, providing system setup, live technical support, and post-event teardown</li>
+          <li>Managed shared digital tools, permissions, and onboarding workflows, reducing setup time for new members and leadership transitions</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">Software Engineering</div>
+          <div class="experience-company">Hatch</div>
+        </div>
+        <div class="experience-meta">Feb 2025 – May 2025 • New York, NY</div>
+        <ul>
+          <li>Contributed to the development of an early-stage platform connecting NYU students with building and collaboration opportunities</li>
+          <li>Worked with the founding team to support platform features related to user profiles, project listings, and community interaction</li>
+          <li>Assisted with testing, refining, and improving core platform functionality</li>
+          <li>Collaborated in an iterative startup environment, gaining hands-on experience building an MVP for a student network</li>
+          <li>Gained exposure to product development, startup workflows, and software development in a campus-based platform</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">Manufacturing & Production Associate</div>
+          <div class="experience-company">Golden Coast Company</div>
+        </div>
+        <div class="experience-meta">Jul 2025 – Aug 2025 • Salalah, Oman</div>
+        <ul>
+          <li>Worked within a food production factory specializing in sesame-based confectionery products</li>
+          <li>Observed and contributed to manufacturing workflows, production coordination, and daily factory operations</li>
+          <li>Helped track production output, inventory levels, and raw material usage</li>
+          <li>Ensured proper organization of production records and operational documentation</li>
+          <li>Gained exposure to food manufacturing standards, production efficiency, and supply coordination</li>
+          <li>Developed an understanding of factory operations within an international business environment</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">Dental Laboratory Operations Associate</div>
+          <div class="experience-company">Rite Smile Dental Laboratory Network (PCDL)</div>
+        </div>
+        <div class="experience-meta">Jul 2024 – Aug 2024 • New York, NY</div>
+        <ul>
+          <li>Managed organization of case files, work orders, and internal laboratory documentation</li>
+          <li>Coordinated communication between laboratory teams, management, and partner dental offices</li>
+          <li>Tracked workflow progress and order status to support timely case completion</li>
+          <li>Maintained accuracy of records related to production and quality control</li>
+          <li>Contributed to operational consistency across a multi-location dental laboratory network</li>
+          <li>Gained practical experience in healthcare operations and laboratory business processes</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">Wrestler</div>
+          <div class="experience-company">Beat the Streets NYC Wrestling</div>
+        </div>
+        <div class="experience-meta">Nov 2023 – Mar 2024 • New York, NY</div>
+        <ul>
+          <li>Trained and competed in a structured, competitive wrestling program focused on discipline, performance, and personal development</li>
+          <li>Maintained a consistent training schedule emphasizing strength, endurance, and technique</li>
+          <li>Demonstrated commitment, resilience, and coachability in a high-intensity athletic environment</li>
+          <li>Developed strong time-management and mental toughness while balancing academics and training</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">Business Administrator</div>
+          <div class="experience-company">Mandi Şebam Restaurant</div>
+        </div>
+        <div class="experience-meta">Jul 2023 – Aug 2023 • Istanbul, Türkiye</div>
+        <ul>
+          <li>Supported the administrative and business functions of a restaurant, focusing on organization, accuracy, and consistency</li>
+          <li>Assisted with organizing financial records, sales documents, and internal paperwork</li>
+          <li>Helped coordinate scheduling, staff coverage, and basic operational planning</li>
+          <li>Supported inventory tracking, supply organization, and cost awareness</li>
+          <li>Assisted ownership with day-to-day administrative tasks and business support</li>
+          <li>Gained practical experience in business administration within a hospitality environment</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div class="experience-title">Real Estate Operations Associate</div>
+          <div class="experience-company">AWTAN Real Estate</div>
+        </div>
+        <div class="experience-meta">Jul 2022 – Aug 2022 • Istanbul, Türkiye</div>
+        <ul>
+          <li>Supported daily operations of a real estate office managing 30+ active residential and commercial listings</li>
+          <li>Organized and maintained 100+ property, client, and transaction records ensuring accurate documentation</li>
+          <li>Coordinated scheduling and communication between agents, clients, and office staff for property viewings</li>
+          <li>Assisted with preparation and organization of lease agreements and internal documentation</li>
+        </ul>
       </div>
     </section>
 
@@ -256,8 +583,13 @@
     <section id="projects">
       <h2>Projects</h2>
       <div class="project-card">
-        <h3>Data Structures in Java</h3>
-        <p>stacks, queues, linked lists, trees, postfix evaluation</p>
+        <h3>Data Structures Projects (Java)</h3>
+        <p>Coursework • 2025</p>
+        <ul>
+          <li>Implemented linked lists, stacks, queues, binary search trees, and hash tables with full CRUD functionality</li>
+          <li>Analyzed time and space complexity tradeoffs and tested performance across large inputs</li>
+          <li>Designed modular class architectures and validated correctness through edge-case testing</li>
+        </ul>
       </div>
       <div class="project-card">
         <h3>Postfix Calculator</h3>
@@ -265,32 +597,56 @@
       </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="experience-item">
-        <h3>IT Co-Head — Hemmes Engineering & Science Society (HESS)</h3>
+    <!-- Education Section -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="education-item">
+        <div class="education-title">New York University</div>
+        <div class="education-meta">Bachelor's degree, Computer Science • Sep 2024 - May 2028 • New York, NY</div>
         <ul>
-          <li>Manage technical systems & documentation</li>
-          <li>Improve workflows & internal tools</li>
+          <li>Relevant Coursework: Data Structures, Computer Systems Organization (In Progress), Discrete Mathematics (In Progress)</li>
         </ul>
+      </div>
+      <div class="education-item">
+        <div class="education-title">Queens Metropolitan High School</div>
+        <div class="education-meta">High School Diploma • Sep 2020 - Jun 2024</div>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <h2>About</h2>
-      <p>Combining engineering with leadership to build strong CS foundations, growing toward backend / product engineering internships.</p>
+    <!-- Technical Skills -->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Programming</h3>
+          <p>Java, Python</p>
+        </div>
+        <div class="skill-category">
+          <h3>Core CS</h3>
+          <p>Data Structures, Algorithms, Object-Oriented Programming, Debugging & Testing</p>
+        </div>
+        <div class="skill-category">
+          <h3>Tools</h3>
+          <p>Git, GitHub, Microsoft Excel (pivot tables, formulas), Google Sheets (formulas, data validation), Word, PowerPoint</p>
+        </div>
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <p>Arabic (Native), English (Native)</p>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">linkedin.com/in/adam-almaktari-390022351/</a></p>
+      <div class="contact">
+        <p>Email: <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
+        <p>Phone: <a href="tel:5162478056">516-247-8056</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">linkedin.com/in/adam-almaktari-390022351/</a></p>
+        <p>GitHub: <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">github.com/adam-a11</a></p>
+      </div>
     </section>
   </div>
 </body>
 </html>
-
 
