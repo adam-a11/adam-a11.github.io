@@ -1,146 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adam Almaktari</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body{
-      margin:0;
-      font-family:Inter,system-ui,sans-serif;
-      background:#0b0b10;
-      color:#fff;
-      line-height:1.6;
-    }
-    a{color:#4f9cff;text-decoration:none}
-    .container{max-width:980px;margin:auto;padding:48px 20px}
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 0;
-      border-bottom:1px solid #1f1f2a;
-    }
-    nav a{margin-left:20px;color:#bbb;font-weight:600}
-    nav a:hover{color:#fff}
-
-    .hero{padding:80px 0}
-    .hero h1{font-size:52px;line-height:1.1;margin-bottom:20px}
-    .hero p{color:#aaa;max-width:620px;font-size:18px}
-    .hero .buttons a{
-      display:inline-block;
-      padding:12px 18px;
-      border:1px solid #2a2a36;
-      border-radius:10px;
-      margin-right:12px;
-      margin-top:16px;
-      font-weight:600;
-    }
-    .hero .buttons a.primary{
-      background:#4f9cff;
-      color:#000;
-      border:none;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    section{margin-top:90px}
-    h2{font-size:28px;margin-bottom:20px}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-    .card{
-      border:1px solid #1f1f2a;
-      border-radius:16px;
-      padding:22px;
-      background:#0f0f16;
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #1a1a1a;
+      --text: #e5e5e5;
+      --text-muted: #a0a0a0;
+      --accent: #ffffff;
+      --hover: #2a2a2a;
     }
-    .card h3{margin-top:0}
-    .muted{color:#aaa;font-size:14px}
 
-    footer{
-      text-align:center;
-      padding:60px 20px;
-      color:#666;
-      font-size:14px;
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-bottom: 120px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: var(--hover);
+      border-color: var(--text-muted);
+      transform: translateY(-1px);
+    }
+
+    /* Section Styling */
+    section {
+      margin-bottom: 80px;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    /* Projects */
+    .project-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--text-muted);
+      transform: translateY(-2px);
+    }
+
+    .project-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .project-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Experience */
+    .experience-item {
+      margin-bottom: 32px;
+    }
+
+    .experience-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-item h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .experience-item ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .experience-item li {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .experience-item li:before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .experience-item li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* About */
+    .about p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* Contact */
+    .contact p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .contact a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s ease;
+    }
+
+    .contact a:hover {
+      border-bottom-color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 60px 20px;
+      }
+
+      .hero {
+        margin-bottom: 80px;
+      }
+
+      section {
+        margin-bottom: 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
-
 <body>
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Building clean systems that actually work.</h1>
+      <p>Computer Science student at NYU focused on engineering fundamentals, data structures, and building real-world systems through leadership and operations.</p>
+      <div class="button-group">
+        <a href="resume.pdf" class="button" target="_blank">Resume</a>
+        <a href="https://github.com/adam-a11" class="button" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" class="button" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
 
-<div class="container">
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="project-card">
+        <h3>Data Structures in Java</h3>
+        <p>stacks, queues, linked lists, trees, postfix evaluation</p>
+      </div>
+      <div class="project-card">
+        <h3>Postfix Calculator</h3>
+        <p>infix → postfix conversion using stack parsing</p>
+      </div>
+    </section>
 
-<header>
-  <strong>Adam Almaktari</strong>
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="experience-item">
+        <h3>IT Co-Head — Hemmes Engineering & Science Society (HESS)</h3>
+        <ul>
+          <li>Manage technical systems & documentation</li>
+          <li>Improve workflows & internal tools</li>
+        </ul>
+      </div>
+    </section>
 
-<section class="hero">
-  <h1>Building clean systems that<br>actually work.</h1>
-  <p>
-    I’m a Computer Science student at NYU focused on engineering fundamentals, real-world systems,
-    and leadership through technology.
-  </p>
-  <div class="buttons">
-    <a class="primary" href="resume.pdf" target="_blank">Resume</a>
-    <a href="https://github.com/adam-a11" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank">LinkedIn</a>
+    <!-- About Section -->
+    <section id="about">
+      <h2>About</h2>
+      <p>Combining engineering with leadership to build strong CS foundations, growing toward backend / product engineering internships.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">linkedin.com/in/adam-almaktari-390022351/</a></p>
+    </section>
   </div>
-</section>
-
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Data Structures in Java</h3>
-      <p>Stacks, queues, linked lists, trees, and postfix expression parsing with clean design.</p>
-      <p class="muted">Java · OOP · Parsing</p>
-    </div>
-    <div class="card">
-      <h3>Postfix Calculator</h3>
-      <p>CLI tool converting infix expressions to postfix and evaluating them using stacks.</p>
-      <p class="muted">Stacks · Algorithms</p>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <h2>Experience</h2>
-  <div class="card">
-    <h3>IT Co-Head — Hemmes Engineering & Science Society (HESS)</h3>
-    <p class="muted">NYU · 2025–Present</p>
-    <ul>
-      <li>Manage IT systems and documentation for engineering society operations.</li>
-      <li>Support technical workflows and improve internal tools.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="about">
-  <h2>About</h2>
-  <p class="muted">
-    I’m passionate about building strong foundations in computer science while learning how technology
-    supports real organizations. I enjoy combining engineering with leadership, operations, and strategy.
-  </p>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="card">
-    <p>Email: <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank">linkedin.com/in/adam-almaktari</a></p>
-  </div>
-</section>
-
-<footer>
-  © 2025 Adam Almaktari
-</footer>
-
-</div>
 </body>
 </html>
+
 
