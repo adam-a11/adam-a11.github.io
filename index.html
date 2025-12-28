@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam Almaktari</title>
+  <title>Adam Almaktari | CS & Math @ NYU</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
     * {
       margin: 0;
       padding: 0;
@@ -12,14 +14,19 @@
     }
 
     :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --surface-elevated: #111111;
       --border: #1a1a1a;
-      --text: #e5e5e5;
+      --border-hover: #2a2a2a;
+      --text: #ffffff;
       --text-muted: #888888;
+      --text-light: #aaaaaa;
       --accent: #ffffff;
-      --hover: #1a1a1a;
-      --link: #888888;
+      --accent-glow: rgba(255, 255, 255, 0.1);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
 
     html {
@@ -27,73 +34,191 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 100px 24px;
+      padding: 0 24px;
     }
 
     /* Hero Section */
     .hero {
-      margin-bottom: 100px;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 0 80px;
+      position: relative;
+      margin-bottom: 120px;
     }
 
-    .hero-intro {
-      font-size: 15px;
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
       color: var(--text-muted);
-      margin-bottom: 16px;
-      font-weight: 500;
+      margin-bottom: 24px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     .hero h1 {
-      font-size: clamp(36px, 6vw, 56px);
-      font-weight: 700;
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 24px;
-      letter-spacing: -0.03em;
-      color: var(--accent);
+      margin-bottom: 32px;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-tagline {
-      font-size: 20px;
-      color: var(--text-muted);
-      margin-bottom: 32px;
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--text-light);
+      margin-bottom: 48px;
       line-height: 1.6;
-      max-width: 600px;
+      max-width: 700px;
+      font-weight: 400;
     }
 
     .hero-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 24px;
-      margin-top: 32px;
+      gap: 16px;
+      margin-top: 40px;
     }
 
-    .hero-links a {
-      color: var(--text);
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
       text-decoration: none;
       font-size: 15px;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease;
-      padding-bottom: 2px;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-links a:hover {
-      border-bottom-color: var(--text-muted);
+    .hero-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .hero-btn:hover::before {
+      left: 100%;
+    }
+
+    .hero-btn:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .hero-btn-primary:hover {
+      background: var(--text-light);
+    }
+
+    /* Stats Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 80px 0;
+      padding: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     /* Section Styling */
     section {
-      margin-bottom: 80px;
+      margin-bottom: 120px;
+      position: relative;
     }
 
     section:last-child {
@@ -101,83 +226,173 @@
     }
 
     h2 {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 600;
-      margin-bottom: 32px;
-      color: var(--accent);
-      letter-spacing: -0.01em;
+      margin-bottom: 48px;
+      color: var(--text-muted);
       text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
     /* At a Glance */
     .glance-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-      margin-bottom: 80px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
     }
 
-    .glance-item h3 {
-      font-size: 12px;
+    .glance-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .glance-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .glance-card h3 {
+      font-size: 11px;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
-    .glance-item p {
-      font-size: 15px;
+    .glance-card p {
+      font-size: 16px;
       color: var(--text);
       line-height: 1.6;
+      font-weight: 500;
     }
 
-    .glance-item .tags {
+    .glance-card .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-top: 12px;
     }
 
-    .glance-item .tag {
+    .glance-card .tag {
       font-size: 13px;
-      color: var(--text-muted);
-      background-color: var(--surface);
-      padding: 4px 10px;
-      border-radius: 4px;
+      color: var(--text);
+      background: var(--surface-elevated);
+      padding: 6px 12px;
+      border-radius: 6px;
       border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .glance-card .tag:hover {
+      border-color: var(--border-hover);
+      transform: scale(1.05);
+    }
+
+    .top-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .top-skill {
+      font-size: 13px;
+      color: var(--text);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+
+    /* About */
+    .about {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+    }
+
+    .about p {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .about p:last-child {
+      margin-bottom: 0;
     }
 
     /* Experience */
+    .experience-timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .experience-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
     .experience-item {
-      margin-bottom: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .experience-item::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background: var(--surface);
+      border: 2px solid var(--text);
+      border-radius: 50%;
+      z-index: 1;
     }
 
     .experience-item:last-child {
-      border-bottom: none;
       margin-bottom: 0;
-      padding-bottom: 0;
     }
 
     .experience-header {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      margin-bottom: 16px;
+      gap: 6px;
+      margin-bottom: 20px;
     }
 
     .experience-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--accent);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
       line-height: 1.3;
     }
 
     .experience-company {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--text-muted);
       font-weight: 500;
     }
@@ -185,7 +400,15 @@
     .experience-meta {
       font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .experience-meta::before {
+      content: '📍';
+      font-size: 14px;
     }
 
     .experience-item ul {
@@ -195,18 +418,19 @@
 
     .experience-item li {
       font-size: 15px;
-      color: var(--text);
-      margin-bottom: 10px;
-      padding-left: 20px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      padding-left: 24px;
       position: relative;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    .experience-item li:before {
-      content: '•';
+    .experience-item li::before {
+      content: '→';
       position: absolute;
-      left: 8px;
+      left: 0;
       color: var(--text-muted);
+      font-weight: 600;
     }
 
     .experience-item li:last-child {
@@ -214,183 +438,272 @@
     }
 
     /* Projects */
+    .projects-grid {
+      display: grid;
+      gap: 24px;
+    }
+
     .project-card {
-      background-color: var(--surface);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 24px;
-      margin-bottom: 16px;
-      transition: all 0.2s ease;
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
     }
 
     .project-card:hover {
-      border-color: var(--text-muted);
-    }
-
-    .project-card:last-child {
-      margin-bottom: 0;
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
     }
 
     .project-card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--accent);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .project-card .project-meta {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .project-card p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.6;
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 20px;
     }
 
     .project-card ul {
       list-style: none;
       padding-left: 0;
-      margin-top: 12px;
+      margin-top: 20px;
     }
 
     .project-card li {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      padding-left: 16px;
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      padding-left: 24px;
       position: relative;
+      line-height: 1.6;
     }
 
-    .project-card li:before {
-      content: '•';
+    .project-card li::before {
+      content: '▸';
       position: absolute;
-      left: 6px;
+      left: 0;
       color: var(--text-muted);
     }
 
     /* Education */
-    .education-item {
-      margin-bottom: 32px;
+    .education-grid {
+      display: grid;
+      gap: 24px;
     }
 
-    .education-item:last-child {
-      margin-bottom: 0;
+    .education-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .education-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
     }
 
     .education-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .education-meta {
-      font-size: 14px;
-      color: var(--text-muted);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
       margin-bottom: 12px;
     }
 
-    .education-item ul {
+    .education-meta {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .education-card ul {
       list-style: none;
       padding-left: 0;
     }
 
-    .education-item li {
+    .education-card li {
       font-size: 15px;
-      color: var(--text);
-      margin-bottom: 6px;
-      padding-left: 16px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      padding-left: 24px;
       position: relative;
     }
 
-    .education-item li:before {
-      content: '•';
+    .education-card li::before {
+      content: '✓';
       position: absolute;
-      left: 6px;
+      left: 0;
       color: var(--text-muted);
     }
 
     /* Skills */
     .skills-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .skill-card h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .skill-card p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 24px;
     }
 
-    .skill-category h3 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-size: 12px;
-    }
-
-    .skill-category p {
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.8;
-    }
-
-    /* About */
-    .about p {
-      font-size: 16px;
-      color: var(--text);
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-
-    .about p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Top Skills */
-    .top-skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .top-skill {
-      font-size: 14px;
-      color: var(--text);
-      background-color: var(--surface);
-      padding: 6px 14px;
-      border-radius: 6px;
+    .contact-item {
+      background: var(--surface);
       border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
     }
 
-    /* Contact */
-    .contact p {
-      font-size: 15px;
-      color: var(--text);
+    .contact-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .contact-item-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-bottom: 12px;
     }
 
-    .contact a {
+    .contact-item a {
+      font-size: 15px;
       color: var(--text);
       text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      transition: border-color 0.2s ease;
+      transition: color 0.2s ease;
     }
 
-    .contact a:hover {
-      border-bottom-color: var(--text-muted);
+    .contact-item a:hover {
+      color: var(--text-light);
     }
 
     /* Responsive */
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       .container {
-        padding: 60px 20px;
+        padding: 0 20px;
       }
 
       .hero {
+        min-height: auto;
+        padding: 80px 0 60px;
         margin-bottom: 80px;
       }
 
       section {
-        margin-bottom: 60px;
+        margin-bottom: 80px;
       }
 
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 32px 24px;
+      }
+
+      .glance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        padding: 32px 24px;
+      }
+
+      .experience-timeline {
+        padding-left: 24px;
+      }
+
+      .experience-item {
+        padding-left: 32px;
+      }
+
+      .experience-item::before {
+        left: -32px;
+      }
+
+      .project-card,
+      .education-card {
+        padding: 24px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
       .hero h1 {
         font-size: 36px;
       }
@@ -399,18 +712,30 @@
         font-size: 18px;
       }
 
-      .glance-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
+      .hero-btn {
+        width: 100%;
+        justify-content: center;
       }
 
-      .skills-grid {
+      .stats {
         grid-template-columns: 1fr;
       }
+    }
 
-      .experience-header {
-        flex-direction: column;
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
       }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section {
+      animation: fadeInUp 0.6s ease-out;
     }
   </style>
 </head>
@@ -418,13 +743,35 @@
   <div class="container">
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-intro">I'm Adam Almaktari</div>
-      <h1>Building clean systems that actually work.</h1>
-      <p class="hero-tagline">CS & Math @ NYU. I take pleasure in both constructing things and figuring out how systems function—not only from the technical side but also in practice.</p>
-      <div class="hero-links">
-        <a href="resume.pdf" target="_blank">Get Resume</a>
-        <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <div class="hero-content">
+        <div class="hero-badge">Available for opportunities</div>
+        <h1>Building clean systems that actually work.</h1>
+        <p class="hero-tagline">CS & Math @ NYU. I take pleasure in both constructing things and figuring out how systems function—not only from the technical side but also in practice.</p>
+        <div class="hero-links">
+          <a href="resume.pdf" class="hero-btn hero-btn-primary" target="_blank">Get Resume</a>
+          <a href="https://github.com/adam-a11" class="hero-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" class="hero-btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Members Supported</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">30%</div>
+        <div class="stat-label">Issue Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Events Per Semester</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2028</div>
+        <div class="stat-label">Expected Graduation</div>
       </div>
     </section>
 
@@ -432,23 +779,24 @@
     <section class="glance">
       <h2>At a Glance</h2>
       <div class="glance-grid">
-        <div class="glance-item">
+        <div class="glance-card">
           <h3>Location</h3>
           <p>New York, NY</p>
         </div>
-        <div class="glance-item">
+        <div class="glance-card">
           <h3>Education</h3>
           <p>NYU • CS & Math • Expected 2028</p>
         </div>
-        <div class="glance-item">
-          <h3>Stacks</h3>
+        <div class="glance-card">
+          <h3>Tech Stack</h3>
           <div class="tags">
             <span class="tag">Java</span>
             <span class="tag">Python</span>
             <span class="tag">Git</span>
+            <span class="tag">Data Structures</span>
           </div>
         </div>
-        <div class="glance-item">
+        <div class="glance-card">
           <h3>Top Skills</h3>
           <div class="top-skills">
             <span class="top-skill">High-Performance Discipline</span>
@@ -472,144 +820,156 @@
     <!-- Experience Section -->
     <section id="experience">
       <h2>Experience</h2>
-      
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">IT Co-Head</div>
-          <div class="experience-company">Hemmes Engineering & Science Society (HESS)</div>
+      <div class="experience-timeline">
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">IT Co-Head</div>
+            <div class="experience-company">Hemmes Engineering & Science Society (HESS)</div>
+          </div>
+          <div class="experience-meta">Sep 2025 – Present • New York, NY</div>
+          <ul>
+            <li>Led IT operations for a multidisciplinary engineering society supporting 50+ active members, ensuring reliable systems for meetings, workshops, and internal coordination</li>
+            <li>Reduced recurring technical issues by 30% by creating centralized documentation, standardized troubleshooting workflows, and structured access controls</li>
+            <li>Supported 5+ large-scale events per semester, providing system setup, live technical support, and post-event teardown</li>
+            <li>Managed shared digital tools, permissions, and onboarding workflows, reducing setup time for new members and leadership transitions</li>
+          </ul>
         </div>
-        <div class="experience-meta">Sep 2025 – Present • New York, NY</div>
-        <ul>
-          <li>Led IT operations for a multidisciplinary engineering society supporting 50+ active members, ensuring reliable systems for meetings, workshops, and internal coordination</li>
-          <li>Reduced recurring technical issues by 30% by creating centralized documentation, standardized troubleshooting workflows, and structured access controls</li>
-          <li>Supported 5+ large-scale events per semester, providing system setup, live technical support, and post-event teardown</li>
-          <li>Managed shared digital tools, permissions, and onboarding workflows, reducing setup time for new members and leadership transitions</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">Software Engineering</div>
-          <div class="experience-company">Hatch</div>
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">Software Engineering</div>
+            <div class="experience-company">Hatch</div>
+          </div>
+          <div class="experience-meta">Feb 2025 – May 2025 • New York, NY</div>
+          <ul>
+            <li>Contributed to the development of an early-stage platform connecting NYU students with building and collaboration opportunities</li>
+            <li>Worked with the founding team to support platform features related to user profiles, project listings, and community interaction</li>
+            <li>Assisted with testing, refining, and improving core platform functionality</li>
+            <li>Collaborated in an iterative startup environment, gaining hands-on experience building an MVP for a student network</li>
+            <li>Gained exposure to product development, startup workflows, and software development in a campus-based platform</li>
+          </ul>
         </div>
-        <div class="experience-meta">Feb 2025 – May 2025 • New York, NY</div>
-        <ul>
-          <li>Contributed to the development of an early-stage platform connecting NYU students with building and collaboration opportunities</li>
-          <li>Worked with the founding team to support platform features related to user profiles, project listings, and community interaction</li>
-          <li>Assisted with testing, refining, and improving core platform functionality</li>
-          <li>Collaborated in an iterative startup environment, gaining hands-on experience building an MVP for a student network</li>
-          <li>Gained exposure to product development, startup workflows, and software development in a campus-based platform</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">Manufacturing & Production Associate</div>
-          <div class="experience-company">Golden Coast Company</div>
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">Manufacturing & Production Associate</div>
+            <div class="experience-company">Golden Coast Company</div>
+          </div>
+          <div class="experience-meta">Jul 2025 – Aug 2025 • Salalah, Oman</div>
+          <ul>
+            <li>Worked within a food production factory specializing in sesame-based confectionery products</li>
+            <li>Observed and contributed to manufacturing workflows, production coordination, and daily factory operations</li>
+            <li>Helped track production output, inventory levels, and raw material usage</li>
+            <li>Ensured proper organization of production records and operational documentation</li>
+            <li>Gained exposure to food manufacturing standards, production efficiency, and supply coordination</li>
+            <li>Developed an understanding of factory operations within an international business environment</li>
+          </ul>
         </div>
-        <div class="experience-meta">Jul 2025 – Aug 2025 • Salalah, Oman</div>
-        <ul>
-          <li>Worked within a food production factory specializing in sesame-based confectionery products</li>
-          <li>Observed and contributed to manufacturing workflows, production coordination, and daily factory operations</li>
-          <li>Helped track production output, inventory levels, and raw material usage</li>
-          <li>Ensured proper organization of production records and operational documentation</li>
-          <li>Gained exposure to food manufacturing standards, production efficiency, and supply coordination</li>
-          <li>Developed an understanding of factory operations within an international business environment</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">Dental Laboratory Operations Associate</div>
-          <div class="experience-company">Rite Smile Dental Laboratory Network (PCDL)</div>
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">Dental Laboratory Operations Associate</div>
+            <div class="experience-company">Rite Smile Dental Laboratory Network (PCDL)</div>
+          </div>
+          <div class="experience-meta">Jul 2024 – Aug 2024 • New York, NY</div>
+          <ul>
+            <li>Managed organization of case files, work orders, and internal laboratory documentation</li>
+            <li>Coordinated communication between laboratory teams, management, and partner dental offices</li>
+            <li>Tracked workflow progress and order status to support timely case completion</li>
+            <li>Maintained accuracy of records related to production and quality control</li>
+            <li>Contributed to operational consistency across a multi-location dental laboratory network</li>
+            <li>Gained practical experience in healthcare operations and laboratory business processes</li>
+          </ul>
         </div>
-        <div class="experience-meta">Jul 2024 – Aug 2024 • New York, NY</div>
-        <ul>
-          <li>Managed organization of case files, work orders, and internal laboratory documentation</li>
-          <li>Coordinated communication between laboratory teams, management, and partner dental offices</li>
-          <li>Tracked workflow progress and order status to support timely case completion</li>
-          <li>Maintained accuracy of records related to production and quality control</li>
-          <li>Contributed to operational consistency across a multi-location dental laboratory network</li>
-          <li>Gained practical experience in healthcare operations and laboratory business processes</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">Wrestler</div>
-          <div class="experience-company">Beat the Streets NYC Wrestling</div>
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">Wrestler</div>
+            <div class="experience-company">Beat the Streets NYC Wrestling</div>
+          </div>
+          <div class="experience-meta">Nov 2023 – Mar 2024 • New York, NY</div>
+          <ul>
+            <li>Trained and competed in a structured, competitive wrestling program focused on discipline, performance, and personal development</li>
+            <li>Maintained a consistent training schedule emphasizing strength, endurance, and technique</li>
+            <li>Demonstrated commitment, resilience, and coachability in a high-intensity athletic environment</li>
+            <li>Developed strong time-management and mental toughness while balancing academics and training</li>
+          </ul>
         </div>
-        <div class="experience-meta">Nov 2023 – Mar 2024 • New York, NY</div>
-        <ul>
-          <li>Trained and competed in a structured, competitive wrestling program focused on discipline, performance, and personal development</li>
-          <li>Maintained a consistent training schedule emphasizing strength, endurance, and technique</li>
-          <li>Demonstrated commitment, resilience, and coachability in a high-intensity athletic environment</li>
-          <li>Developed strong time-management and mental toughness while balancing academics and training</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">Business Administrator</div>
-          <div class="experience-company">Mandi Şebam Restaurant</div>
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">Business Administrator</div>
+            <div class="experience-company">Mandi Şebam Restaurant</div>
+          </div>
+          <div class="experience-meta">Jul 2023 – Aug 2023 • Istanbul, Türkiye</div>
+          <ul>
+            <li>Supported the administrative and business functions of a restaurant, focusing on organization, accuracy, and consistency</li>
+            <li>Assisted with organizing financial records, sales documents, and internal paperwork</li>
+            <li>Helped coordinate scheduling, staff coverage, and basic operational planning</li>
+            <li>Supported inventory tracking, supply organization, and cost awareness</li>
+            <li>Assisted ownership with day-to-day administrative tasks and business support</li>
+            <li>Gained practical experience in business administration within a hospitality environment</li>
+          </ul>
         </div>
-        <div class="experience-meta">Jul 2023 – Aug 2023 • Istanbul, Türkiye</div>
-        <ul>
-          <li>Supported the administrative and business functions of a restaurant, focusing on organization, accuracy, and consistency</li>
-          <li>Assisted with organizing financial records, sales documents, and internal paperwork</li>
-          <li>Helped coordinate scheduling, staff coverage, and basic operational planning</li>
-          <li>Supported inventory tracking, supply organization, and cost awareness</li>
-          <li>Assisted ownership with day-to-day administrative tasks and business support</li>
-          <li>Gained practical experience in business administration within a hospitality environment</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div class="experience-title">Real Estate Operations Associate</div>
-          <div class="experience-company">AWTAN Real Estate</div>
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-title">Real Estate Operations Associate</div>
+            <div class="experience-company">AWTAN Real Estate</div>
+          </div>
+          <div class="experience-meta">Jul 2022 – Aug 2022 • Istanbul, Türkiye</div>
+          <ul>
+            <li>Supported daily operations of a real estate office managing 30+ active residential and commercial listings</li>
+            <li>Organized and maintained 100+ property, client, and transaction records ensuring accurate documentation</li>
+            <li>Coordinated scheduling and communication between agents, clients, and office staff for property viewings</li>
+            <li>Assisted with preparation and organization of lease agreements and internal documentation</li>
+          </ul>
         </div>
-        <div class="experience-meta">Jul 2022 – Aug 2022 • Istanbul, Türkiye</div>
-        <ul>
-          <li>Supported daily operations of a real estate office managing 30+ active residential and commercial listings</li>
-          <li>Organized and maintained 100+ property, client, and transaction records ensuring accurate documentation</li>
-          <li>Coordinated scheduling and communication between agents, clients, and office staff for property viewings</li>
-          <li>Assisted with preparation and organization of lease agreements and internal documentation</li>
-        </ul>
       </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
       <h2>Projects</h2>
-      <div class="project-card">
-        <h3>Data Structures Projects (Java)</h3>
-        <p>Coursework • 2025</p>
-        <ul>
-          <li>Implemented linked lists, stacks, queues, binary search trees, and hash tables with full CRUD functionality</li>
-          <li>Analyzed time and space complexity tradeoffs and tested performance across large inputs</li>
-          <li>Designed modular class architectures and validated correctness through edge-case testing</li>
-        </ul>
-      </div>
-      <div class="project-card">
-        <h3>Postfix Calculator</h3>
-        <p>infix → postfix conversion using stack parsing</p>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Data Structures Projects (Java)</h3>
+          <div class="project-meta">Coursework • 2025</div>
+          <p>Comprehensive implementation of core data structures with full CRUD functionality and performance analysis.</p>
+          <ul>
+            <li>Implemented linked lists, stacks, queues, binary search trees, and hash tables with full CRUD functionality</li>
+            <li>Analyzed time and space complexity tradeoffs and tested performance across large inputs</li>
+            <li>Designed modular class architectures and validated correctness through edge-case testing</li>
+          </ul>
+        </div>
+        <div class="project-card">
+          <h3>Postfix Calculator</h3>
+          <div class="project-meta">Algorithm Implementation • 2025</div>
+          <p>Efficient infix to postfix conversion using stack-based parsing algorithms.</p>
+          <ul>
+            <li>Implemented stack-based parsing for mathematical expression conversion</li>
+            <li>Handled operator precedence and associativity correctly</li>
+            <li>Optimized for performance with O(n) time complexity</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- Education Section -->
     <section id="education">
       <h2>Education</h2>
-      <div class="education-item">
-        <div class="education-title">New York University</div>
-        <div class="education-meta">Bachelor's degree, Computer Science • Sep 2024 - May 2028 • New York, NY</div>
-        <ul>
-          <li>Relevant Coursework: Data Structures, Computer Systems Organization (In Progress), Discrete Mathematics (In Progress)</li>
-        </ul>
-      </div>
-      <div class="education-item">
-        <div class="education-title">Queens Metropolitan High School</div>
-        <div class="education-meta">High School Diploma • Sep 2020 - Jun 2024</div>
+      <div class="education-grid">
+        <div class="education-card">
+          <div class="education-title">New York University</div>
+          <div class="education-meta">Bachelor's degree, Computer Science • Sep 2024 - May 2028 • New York, NY</div>
+          <ul>
+            <li>Relevant Coursework: Data Structures, Computer Systems Organization (In Progress), Discrete Mathematics (In Progress)</li>
+          </ul>
+        </div>
+        <div class="education-card">
+          <div class="education-title">Queens Metropolitan High School</div>
+          <div class="education-meta">High School Diploma • Sep 2020 - Jun 2024</div>
+        </div>
       </div>
     </section>
 
@@ -617,19 +977,19 @@
     <section id="skills">
       <h2>Technical Skills</h2>
       <div class="skills-grid">
-        <div class="skill-category">
+        <div class="skill-card">
           <h3>Programming</h3>
           <p>Java, Python</p>
         </div>
-        <div class="skill-category">
+        <div class="skill-card">
           <h3>Core CS</h3>
           <p>Data Structures, Algorithms, Object-Oriented Programming, Debugging & Testing</p>
         </div>
-        <div class="skill-category">
+        <div class="skill-card">
           <h3>Tools</h3>
           <p>Git, GitHub, Microsoft Excel (pivot tables, formulas), Google Sheets (formulas, data validation), Word, PowerPoint</p>
         </div>
-        <div class="skill-category">
+        <div class="skill-card">
           <h3>Languages</h3>
           <p>Arabic (Native), English (Native)</p>
         </div>
@@ -639,11 +999,23 @@
     <!-- Contact Section -->
     <section id="contact">
       <h2>Contact</h2>
-      <div class="contact">
-        <p>Email: <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a></p>
-        <p>Phone: <a href="tel:5162478056">516-247-8056</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">linkedin.com/in/adam-almaktari-390022351/</a></p>
-        <p>GitHub: <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">github.com/adam-a11</a></p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-item-label">Email</div>
+          <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">Phone</div>
+          <a href="tel:5162478056">516-247-8056</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">Connect</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">GitHub</div>
+          <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">View Profile</a>
+        </div>
       </div>
     </section>
   </div>
