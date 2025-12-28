@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam Almaktari | CS & Math @ NYU</title>
+  <title>Adam Almaktari</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     
     * {
       margin: 0;
@@ -17,16 +17,15 @@
       --bg: #000000;
       --surface: #0a0a0a;
       --surface-elevated: #111111;
-      --border: #1a1a1a;
-      --border-hover: #2a2a2a;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
       --text: #ffffff;
       --text-muted: #888888;
       --text-light: #aaaaaa;
       --accent: #ffffff;
-      --accent-glow: rgba(255, 255, 255, 0.1);
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --glow: rgba(255, 255, 255, 0.1);
+      --gradient-1: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+      --gradient-2: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
     }
 
     html {
@@ -34,8 +33,8 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: var(--bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       font-size: 16px;
@@ -45,33 +44,38 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 32px;
     }
 
     /* Hero Section */
     .hero {
-      min-height: 90vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 120px 0 80px;
       position: relative;
-      margin-bottom: 120px;
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
+      top: 20%;
       left: 50%;
       transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
-      filter: blur(80px);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      filter: blur(100px);
       z-index: 0;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
     }
 
     .hero-content {
@@ -79,63 +83,52 @@
       z-index: 1;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .hero-name {
       font-size: 14px;
+      font-weight: 500;
       color: var(--text-muted);
       margin-bottom: 24px;
-      padding: 8px 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      width: fit-content;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.2s forwards;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 7vw, 72px);
+      font-size: clamp(48px, 8vw, 96px);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.05;
       margin-bottom: 32px;
       letter-spacing: -0.04em;
       background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.4s forwards;
     }
 
-    .hero-tagline {
+    .hero-subtext {
       font-size: clamp(18px, 2.5vw, 24px);
       color: var(--text-light);
       margin-bottom: 48px;
       line-height: 1.6;
       max-width: 700px;
       font-weight: 400;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.6s forwards;
     }
 
-    .hero-links {
+    .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-top: 40px;
+      margin-bottom: 64px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.8s forwards;
     }
 
-    .hero-btn {
+    .btn {
       display: inline-flex;
       align-items: center;
       padding: 14px 28px;
@@ -146,12 +139,12 @@
       font-size: 15px;
       font-weight: 500;
       color: var(--text);
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
 
-    .hero-btn::before {
+    .btn::before {
       content: '';
       position: absolute;
       top: 0;
@@ -159,74 +152,71 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transition: left 0.5s;
+      transition: left 0.6s;
     }
 
-    .hero-btn:hover::before {
+    .btn:hover::before {
       left: 100%;
     }
 
-    .hero-btn:hover {
+    .btn:hover {
       border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }
 
-    .hero-btn-primary {
+    .btn-primary {
       background: var(--text);
       color: var(--bg);
       border-color: var(--text);
     }
 
-    .hero-btn-primary:hover {
+    .btn-primary:hover {
       background: var(--text-light);
     }
 
-    /* Stats Section */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Proof Strip */
+    .proof-strip {
+      display: flex;
+      flex-wrap: wrap;
       gap: 24px;
-      margin: 80px 0;
-      padding: 40px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 1s forwards;
     }
 
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 36px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 8px;
-    }
-
-    .stat-label {
+    .proof-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 14px;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .proof-badge::before {
+      content: '→';
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      font-weight: 600;
     }
 
     /* Section Styling */
     section {
       margin-bottom: 120px;
-      position: relative;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
 
-    section:last-child {
-      margin-bottom: 0;
-    }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+    section:nth-child(5) { animation-delay: 0.5s; }
+    section:nth-child(6) { animation-delay: 0.6s; }
 
     h2 {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       margin-bottom: 48px;
       color: var(--text-muted);
@@ -244,199 +234,6 @@
       background: var(--border);
     }
 
-    /* At a Glance */
-    .glance-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-
-    .glance-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.3s ease;
-    }
-
-    .glance-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .glance-card h3 {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-    }
-
-    .glance-card p {
-      font-size: 16px;
-      color: var(--text);
-      line-height: 1.6;
-      font-weight: 500;
-    }
-
-    .glance-card .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .glance-card .tag {
-      font-size: 13px;
-      color: var(--text);
-      background: var(--surface-elevated);
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      transition: all 0.2s ease;
-    }
-
-    .glance-card .tag:hover {
-      border-color: var(--border-hover);
-      transform: scale(1.05);
-    }
-
-    .top-skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .top-skill {
-      font-size: 13px;
-      color: var(--text);
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(102, 126, 234, 0.3);
-    }
-
-    /* About */
-    .about {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 48px;
-    }
-
-    .about p {
-      font-size: 17px;
-      color: var(--text-light);
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
-
-    .about p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Experience */
-    .experience-timeline {
-      position: relative;
-      padding-left: 32px;
-    }
-
-    .experience-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .experience-item {
-      margin-bottom: 64px;
-      position: relative;
-      padding-left: 40px;
-    }
-
-    .experience-item::before {
-      content: '';
-      position: absolute;
-      left: -40px;
-      top: 8px;
-      width: 12px;
-      height: 12px;
-      background: var(--surface);
-      border: 2px solid var(--text);
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .experience-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .experience-header {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 20px;
-    }
-
-    .experience-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.3;
-    }
-
-    .experience-company {
-      font-size: 16px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .experience-meta {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .experience-meta::before {
-      content: '📍';
-      font-size: 14px;
-    }
-
-    .experience-item ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .experience-item li {
-      font-size: 15px;
-      color: var(--text-light);
-      margin-bottom: 12px;
-      padding-left: 24px;
-      position: relative;
-      line-height: 1.7;
-    }
-
-    .experience-item li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .experience-item li:last-child {
-      margin-bottom: 0;
-    }
-
     /* Projects */
     .projects-grid {
       display: grid;
@@ -447,8 +244,8 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 32px;
-      transition: all 0.3s ease;
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
@@ -459,11 +256,11 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.8) 0%, rgba(168, 85, 247, 0.8) 100%);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .project-card:hover::before {
@@ -473,140 +270,184 @@
     .project-card:hover {
       border-color: var(--border-hover);
       transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+      background: var(--surface-elevated);
     }
 
-    .project-card h3 {
-      font-size: 22px;
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      gap: 24px;
+    }
+
+    .project-title {
+      font-size: 28px;
       font-weight: 700;
-      margin-bottom: 12px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .project-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .project-link:hover {
       color: var(--text);
     }
 
-    .project-card .project-meta {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .project-card p {
-      font-size: 16px;
+    .project-description {
+      font-size: 17px;
       color: var(--text-light);
       line-height: 1.7;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    .project-card ul {
+    .project-proves {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-proves-title {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .project-proves-list {
       list-style: none;
-      padding-left: 0;
-      margin-top: 20px;
+      padding: 0;
     }
 
-    .project-card li {
+    .project-proves-list li {
       font-size: 15px;
       color: var(--text-light);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       padding-left: 24px;
       position: relative;
       line-height: 1.6;
     }
 
-    .project-card li::before {
+    .project-proves-list li::before {
       content: '▸';
       position: absolute;
       left: 0;
       color: var(--text-muted);
+      font-weight: 600;
     }
 
-    /* Education */
-    .education-grid {
+    .project-proves-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Experience */
+    .experience-grid {
       display: grid;
-      gap: 24px;
+      gap: 32px;
     }
 
-    .education-card {
+    .experience-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 32px;
-      transition: all 0.3s ease;
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .education-card:hover {
+    .experience-card:hover {
       border-color: var(--border-hover);
       transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+      background: var(--surface-elevated);
     }
 
-    .education-title {
-      font-size: 22px;
+    .experience-header {
+      margin-bottom: 24px;
+    }
+
+    .experience-title {
+      font-size: 24px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      line-height: 1.3;
     }
 
-    .education-meta {
-      font-size: 15px;
+    .experience-company {
+      font-size: 16px;
       color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .experience-description {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .experience-description p {
+      margin-bottom: 16px;
+    }
+
+    .experience-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Other Experience */
+    .other-experience {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 40px;
+    }
+
+    .other-experience-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .other-experience-list li {
+      font-size: 15px;
+      color: var(--text-light);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .other-experience-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* About */
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .about-text {
+      font-size: 18px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .about-text p {
       margin-bottom: 20px;
     }
 
-    .education-card ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .education-card li {
-      font-size: 15px;
-      color: var(--text-light);
-      margin-bottom: 8px;
-      padding-left: 24px;
-      position: relative;
-    }
-
-    .education-card li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
-
-    .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.3s ease;
-    }
-
-    .skill-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-    }
-
-    .skill-card h3 {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .skill-card p {
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.8;
+    .about-text p:last-child {
+      margin-bottom: 0;
     }
 
     /* Contact */
@@ -626,10 +467,10 @@
 
     .contact-item:hover {
       border-color: var(--border-hover);
-      transform: translateY(-4px);
+      transform: translateY(-2px);
     }
 
-    .contact-item-label {
+    .contact-label {
       font-size: 12px;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -637,96 +478,22 @@
       margin-bottom: 12px;
     }
 
-    .contact-item a {
+    .contact-link {
       font-size: 15px;
       color: var(--text);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
-    .contact-item a:hover {
+    .contact-link:hover {
       color: var(--text-light);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
-
-      .hero {
-        min-height: auto;
-        padding: 80px 0 60px;
-        margin-bottom: 80px;
-      }
-
-      section {
-        margin-bottom: 80px;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 32px 24px;
-      }
-
-      .glance-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about {
-        padding: 32px 24px;
-      }
-
-      .experience-timeline {
-        padding-left: 24px;
-      }
-
-      .experience-item {
-        padding-left: 32px;
-      }
-
-      .experience-item::before {
-        left: -32px;
-      }
-
-      .project-card,
-      .education-card {
-        padding: 24px;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 36px;
-      }
-
-      .hero-tagline {
-        font-size: 18px;
-      }
-
-      .hero-btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
@@ -734,8 +501,63 @@
       }
     }
 
-    section {
-      animation: fadeInUp 0.6s ease-out;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 100px 0 60px;
+      }
+
+      section {
+        margin-bottom: 80px;
+      }
+
+      .proof-strip {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .project-card,
+      .experience-card,
+      .about-card {
+        padding: 32px 24px;
+      }
+
+      .project-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .other-experience {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero-subtext {
+        font-size: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .project-title {
+        font-size: 22px;
+      }
+
+      .experience-title {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
@@ -744,277 +566,141 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <div class="hero-badge">Available for opportunities</div>
-        <h1>Building clean systems that actually work.</h1>
-        <p class="hero-tagline">CS & Math @ NYU. I take pleasure in both constructing things and figuring out how systems function—not only from the technical side but also in practice.</p>
-        <div class="hero-links">
-          <a href="resume.pdf" class="hero-btn hero-btn-primary" target="_blank">Get Resume</a>
-          <a href="https://github.com/adam-a11" class="hero-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" class="hero-btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <div class="hero-name">Adam Almaktari</div>
+        <h1>CS @ NYU building clean systems that hold up in the real world.</h1>
+        <p class="hero-subtext">
+          Engineering foundations mixed with leadership and operations.<br>
+          Focused on Java, data structures, and shipping things that don't break.
+        </p>
+        <div class="hero-buttons">
+          <a href="resume.pdf" class="btn btn-primary" target="_blank">Resume</a>
+          <a href="https://github.com/adam-a11" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" class="btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:aa12255@nyu.edu" class="btn">Email</a>
+        </div>
+        <div class="proof-strip">
+          <div class="proof-badge">NYU • Computer Science • Expected 2028</div>
+          <div class="proof-badge">IT Co-Head • HESS</div>
+          <div class="proof-badge">Java + Data Structures</div>
+          <div class="proof-badge">Internship-ready projects</div>
         </div>
       </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-      <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Members Supported</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">30%</div>
-        <div class="stat-label">Issue Reduction</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">5+</div>
-        <div class="stat-label">Events Per Semester</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">2028</div>
-        <div class="stat-label">Expected Graduation</div>
-      </div>
-    </section>
-
-    <!-- At a Glance -->
-    <section class="glance">
-      <h2>At a Glance</h2>
-      <div class="glance-grid">
-        <div class="glance-card">
-          <h3>Location</h3>
-          <p>New York, NY</p>
-        </div>
-        <div class="glance-card">
-          <h3>Education</h3>
-          <p>NYU • CS & Math • Expected 2028</p>
-        </div>
-        <div class="glance-card">
-          <h3>Tech Stack</h3>
-          <div class="tags">
-            <span class="tag">Java</span>
-            <span class="tag">Python</span>
-            <span class="tag">Git</span>
-            <span class="tag">Data Structures</span>
-          </div>
-        </div>
-        <div class="glance-card">
-          <h3>Top Skills</h3>
-          <div class="top-skills">
-            <span class="top-skill">High-Performance Discipline</span>
-            <span class="top-skill">Team Coordination</span>
-            <span class="top-skill">Performance Accountability</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-      <h2>About</h2>
-      <div class="about">
-        <p>I am studying CS and Math at NYU, and I take pleasure in both constructing things and figuring out how systems function, not only from the technical side but also in practice. The truth is that I am heavily fascinated by AI and the idea of solving problems by means of software. Apart from that, I like to learn how concepts turn into actual products and platforms.</p>
-        <p>Alongside my technical fascination, I have been involved in different business settings such as early-stage startups, the food industry, healthcare, real estate, and the hospitality sector. These experiences have significantly contributed to my understanding of the issues of execution, structure, and scale, which I now perceive as going beyond the classroom.</p>
-        <p>I am mostly attracted to the fusion of computer science and business, where robust engineering is the backbone for real-life applications and long-term value.</p>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="experience-timeline">
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">IT Co-Head</div>
-            <div class="experience-company">Hemmes Engineering & Science Society (HESS)</div>
-          </div>
-          <div class="experience-meta">Sep 2025 – Present • New York, NY</div>
-          <ul>
-            <li>Led IT operations for a multidisciplinary engineering society supporting 50+ active members, ensuring reliable systems for meetings, workshops, and internal coordination</li>
-            <li>Reduced recurring technical issues by 30% by creating centralized documentation, standardized troubleshooting workflows, and structured access controls</li>
-            <li>Supported 5+ large-scale events per semester, providing system setup, live technical support, and post-event teardown</li>
-            <li>Managed shared digital tools, permissions, and onboarding workflows, reducing setup time for new members and leadership transitions</li>
-          </ul>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">Software Engineering</div>
-            <div class="experience-company">Hatch</div>
-          </div>
-          <div class="experience-meta">Feb 2025 – May 2025 • New York, NY</div>
-          <ul>
-            <li>Contributed to the development of an early-stage platform connecting NYU students with building and collaboration opportunities</li>
-            <li>Worked with the founding team to support platform features related to user profiles, project listings, and community interaction</li>
-            <li>Assisted with testing, refining, and improving core platform functionality</li>
-            <li>Collaborated in an iterative startup environment, gaining hands-on experience building an MVP for a student network</li>
-            <li>Gained exposure to product development, startup workflows, and software development in a campus-based platform</li>
-          </ul>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">Manufacturing & Production Associate</div>
-            <div class="experience-company">Golden Coast Company</div>
-          </div>
-          <div class="experience-meta">Jul 2025 – Aug 2025 • Salalah, Oman</div>
-          <ul>
-            <li>Worked within a food production factory specializing in sesame-based confectionery products</li>
-            <li>Observed and contributed to manufacturing workflows, production coordination, and daily factory operations</li>
-            <li>Helped track production output, inventory levels, and raw material usage</li>
-            <li>Ensured proper organization of production records and operational documentation</li>
-            <li>Gained exposure to food manufacturing standards, production efficiency, and supply coordination</li>
-            <li>Developed an understanding of factory operations within an international business environment</li>
-          </ul>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">Dental Laboratory Operations Associate</div>
-            <div class="experience-company">Rite Smile Dental Laboratory Network (PCDL)</div>
-          </div>
-          <div class="experience-meta">Jul 2024 – Aug 2024 • New York, NY</div>
-          <ul>
-            <li>Managed organization of case files, work orders, and internal laboratory documentation</li>
-            <li>Coordinated communication between laboratory teams, management, and partner dental offices</li>
-            <li>Tracked workflow progress and order status to support timely case completion</li>
-            <li>Maintained accuracy of records related to production and quality control</li>
-            <li>Contributed to operational consistency across a multi-location dental laboratory network</li>
-            <li>Gained practical experience in healthcare operations and laboratory business processes</li>
-          </ul>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">Wrestler</div>
-            <div class="experience-company">Beat the Streets NYC Wrestling</div>
-          </div>
-          <div class="experience-meta">Nov 2023 – Mar 2024 • New York, NY</div>
-          <ul>
-            <li>Trained and competed in a structured, competitive wrestling program focused on discipline, performance, and personal development</li>
-            <li>Maintained a consistent training schedule emphasizing strength, endurance, and technique</li>
-            <li>Demonstrated commitment, resilience, and coachability in a high-intensity athletic environment</li>
-            <li>Developed strong time-management and mental toughness while balancing academics and training</li>
-          </ul>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">Business Administrator</div>
-            <div class="experience-company">Mandi Şebam Restaurant</div>
-          </div>
-          <div class="experience-meta">Jul 2023 – Aug 2023 • Istanbul, Türkiye</div>
-          <ul>
-            <li>Supported the administrative and business functions of a restaurant, focusing on organization, accuracy, and consistency</li>
-            <li>Assisted with organizing financial records, sales documents, and internal paperwork</li>
-            <li>Helped coordinate scheduling, staff coverage, and basic operational planning</li>
-            <li>Supported inventory tracking, supply organization, and cost awareness</li>
-            <li>Assisted ownership with day-to-day administrative tasks and business support</li>
-            <li>Gained practical experience in business administration within a hospitality environment</li>
-          </ul>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-header">
-            <div class="experience-title">Real Estate Operations Associate</div>
-            <div class="experience-company">AWTAN Real Estate</div>
-          </div>
-          <div class="experience-meta">Jul 2022 – Aug 2022 • Istanbul, Türkiye</div>
-          <ul>
-            <li>Supported daily operations of a real estate office managing 30+ active residential and commercial listings</li>
-            <li>Organized and maintained 100+ property, client, and transaction records ensuring accurate documentation</li>
-            <li>Coordinated scheduling and communication between agents, clients, and office staff for property viewings</li>
-            <li>Assisted with preparation and organization of lease agreements and internal documentation</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
+    <!-- Featured Projects -->
     <section id="projects">
-      <h2>Projects</h2>
+      <h2>Featured Projects</h2>
       <div class="projects-grid">
         <div class="project-card">
-          <h3>Data Structures Projects (Java)</h3>
-          <div class="project-meta">Coursework • 2025</div>
-          <p>Comprehensive implementation of core data structures with full CRUD functionality and performance analysis.</p>
-          <ul>
-            <li>Implemented linked lists, stacks, queues, binary search trees, and hash tables with full CRUD functionality</li>
-            <li>Analyzed time and space complexity tradeoffs and tested performance across large inputs</li>
-            <li>Designed modular class architectures and validated correctness through edge-case testing</li>
-          </ul>
+          <div class="project-header">
+            <h3 class="project-title">Data Structures Projects (Java)</h3>
+            <a href="https://github.com/adam-a11/data-structures-projects" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+          </div>
+          <p class="project-description">
+            Core implementations of linked lists, stacks, queues, trees, and hashing with correctness and performance focus.
+          </p>
+          <div class="project-proves">
+            <div class="project-proves-title">What it proves</div>
+            <ul class="project-proves-list">
+              <li>I understand how data structures actually work under the hood</li>
+              <li>I test edge cases instead of ignoring them</li>
+              <li>I design modular, readable Java systems</li>
+            </ul>
+          </div>
         </div>
+
         <div class="project-card">
-          <h3>Postfix Calculator</h3>
-          <div class="project-meta">Algorithm Implementation • 2025</div>
-          <p>Efficient infix to postfix conversion using stack-based parsing algorithms.</p>
-          <ul>
-            <li>Implemented stack-based parsing for mathematical expression conversion</li>
-            <li>Handled operator precedence and associativity correctly</li>
-            <li>Optimized for performance with O(n) time complexity</li>
-          </ul>
+          <div class="project-header">
+            <h3 class="project-title">Postfix Calculator</h3>
+            <a href="https://github.com/adam-a11/data-structures-projects" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+          </div>
+          <p class="project-description">
+            Infix → postfix conversion using stack-based parsing and evaluation.
+          </p>
+          <div class="project-proves">
+            <div class="project-proves-title">What it proves</div>
+            <ul class="project-proves-list">
+              <li>Stack-driven parsing logic</li>
+              <li>Separation of concerns in Java</li>
+              <li>Testing correctness on real input</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education">
-      <h2>Education</h2>
-      <div class="education-grid">
-        <div class="education-card">
-          <div class="education-title">New York University</div>
-          <div class="education-meta">Bachelor's degree, Computer Science • Sep 2024 - May 2028 • New York, NY</div>
-          <ul>
-            <li>Relevant Coursework: Data Structures, Computer Systems Organization (In Progress), Discrete Mathematics (In Progress)</li>
-          </ul>
+    <!-- Featured Experience -->
+    <section id="experience">
+      <h2>Featured Experience</h2>
+      <div class="experience-grid">
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="experience-title">IT Co-Head — Hemmes Engineering & Science Society</div>
+            <div class="experience-company">HESS</div>
+          </div>
+          <div class="experience-description">
+            <p>Built documentation and troubleshooting workflows that reduced recurring issues.</p>
+            <p>Supported technical operations for large-scale events.</p>
+            <p>Designed systems that stayed reliable under real usage.</p>
+          </div>
         </div>
-        <div class="education-card">
-          <div class="education-title">Queens Metropolitan High School</div>
-          <div class="education-meta">High School Diploma • Sep 2020 - Jun 2024</div>
+
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="experience-title">Software Engineering — Hatch</div>
+            <div class="experience-company">Student Startup</div>
+          </div>
+          <div class="experience-description">
+            <p>Helped shape MVP features for a student collaboration platform.</p>
+            <p>Worked in rapid iteration cycles with founders.</p>
+            <p>Learned how products break — and how to fix them fast.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Technical Skills -->
-    <section id="skills">
-      <h2>Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>Programming</h3>
-          <p>Java, Python</p>
-        </div>
-        <div class="skill-card">
-          <h3>Core CS</h3>
-          <p>Data Structures, Algorithms, Object-Oriented Programming, Debugging & Testing</p>
-        </div>
-        <div class="skill-card">
-          <h3>Tools</h3>
-          <p>Git, GitHub, Microsoft Excel (pivot tables, formulas), Google Sheets (formulas, data validation), Word, PowerPoint</p>
-        </div>
-        <div class="skill-card">
-          <h3>Languages</h3>
-          <p>Arabic (Native), English (Native)</p>
+    <!-- Other Experience -->
+    <section id="other-experience">
+      <h2>Other Experience</h2>
+      <div class="other-experience">
+        <ul class="other-experience-list">
+          <li>Golden Coast Company — Manufacturing</li>
+          <li>Rite Smile Dental Lab — Operations</li>
+          <li>AWTAN Real Estate — Ops</li>
+          <li>Mandi Şebam Restaurant — Admin</li>
+          <li>Beat the Streets NYC — Wrestling</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About</h2>
+      <div class="about-card">
+        <div class="about-text">
+          <p>I'm building into software engineering with a strong CS foundation and an interest in AI.</p>
+          <p>My background in operations helps me design systems that survive outside the classroom.</p>
+          <p>I care about clean structure, documentation, and reliability.</p>
+          <p>Actively seeking backend or product-focused internships.</p>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
       <div class="contact-grid">
         <div class="contact-item">
-          <div class="contact-item-label">Email</div>
-          <a href="mailto:aa12255@nyu.edu">aa12255@nyu.edu</a>
+          <div class="contact-label">Email</div>
+          <a href="mailto:aa12255@nyu.edu" class="contact-link">aa12255@nyu.edu</a>
         </div>
         <div class="contact-item">
-          <div class="contact-item-label">Phone</div>
-          <a href="tel:5162478056">516-247-8056</a>
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/adam-a11" class="contact-link" target="_blank" rel="noopener noreferrer">github.com/adam-a11</a>
         </div>
         <div class="contact-item">
-          <div class="contact-item-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">Connect</a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-label">GitHub</div>
-          <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">View Profile</a>
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" class="contact-link" target="_blank" rel="noopener noreferrer">linkedin.com/in/adam-almaktari-390022351</a>
         </div>
       </div>
     </section>
