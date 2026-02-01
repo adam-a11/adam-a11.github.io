@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Almaktari</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #000000;
+      --surface: #111111;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #888888;
+      --text-light: #aaaaaa;
+      --accent: #3b82f6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      background: var(--text);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--bg);
+      text-decoration: none;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .header-icon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-icon:hover {
+      opacity: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 64px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtext {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    .hero-subtext strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .status-badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-dot.green {
+      background: #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    .status-dot.blue {
+      background: var(--accent);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .time-location {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .social-icon {
+      width: 24px;
+      height: 24px;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+      cursor: pointer;
+    }
+
+    .social-icon:hover {
+      opacity: 1;
+    }
+
+    /* Section Styling */
+    section {
+      margin-bottom: 80px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    /* At a Glance */
+    .glance-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .glance-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .glance-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .glance-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .glance-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .glance-content {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .glance-content p {
+      margin-bottom: 12px;
+    }
+
+    .glance-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Interactive Map */
+    .map-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .map-container:active {
+      cursor: grabbing;
+    }
+
+    .world-map {
+      width: 100%;
+      height: 100%;
+      transform-origin: center center;
+    }
+
+    .location-marker {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #ef4444;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse-marker 2s infinite;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+
+    .location-marker::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(239, 68, 68, 0.3);
+      border-radius: 50%;
+      animation: ripple 2s infinite;
+    }
+
+    @keyframes pulse-marker {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+      }
+    }
+
+    .map-controls {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .map-btn {
+      width: 32px;
+      height: 32px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .map-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: var(--text-muted);
+    }
+
+    .stacks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+      justify-items: center;
+    }
+
+    .stack-icon {
+      width: 50px;
+      height: 50px;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .stack-icon:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .github-graph {
+      display: grid;
+      grid-template-columns: repeat(53, 1fr);
+      gap: 4px;
+      margin-top: 16px;
+    }
+
+    .github-day {
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+
+    .github-day.active {
+      background: #10b981;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .project-description {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .project-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .project-link {
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .contact-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .contact-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .contact-email-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .contact-email-btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .about-section {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .about-name {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .about-tagline {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .spotify-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+
+    .spotify-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 48px;
+      margin-top: 80px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .footer-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .header {
+        padding: 16px 20px;
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero-subtext {
+        font-size: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .status-badges {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo">A</a>
+    <div class="header-actions">
+      <svg class="header-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+      <svg class="header-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+      <svg class="header-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>I'm Adam Almaktari</h1>
+      <p class="hero-subtext">
+        CS @ NYU building clean systems that hold up in the real world. Software developer focused on <strong>engineering fundamentals</strong>, <strong>data structures</strong>, and building things that don't break.
+      </p>
+      <div class="hero-buttons">
+        <a href="resume.pdf" class="btn" target="_blank">
+          <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          Get Resume
+        </a>
+        <a href="#about" class="btn">More About Me</a>
+      </div>
+      <div class="status-badges">
+        <div class="status-badge">
+          <span class="status-dot green"></span>
+          Open to work
+        </div>
+        <div class="status-badge">
+          <span class="status-dot blue"></span>
+          <span class="time-location" id="timeLocation">--:-- 🇺🇸</span>
+        </div>
+      </div>
+      <div class="social-icons">
+        <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer" class="social-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer" class="social-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351v-11.452h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9.25h3.564v11.202zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:aa12255@nyu.edu" class="social-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- Selected Projects -->
+    <section class="projects">
+      <h2>Selected Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3 class="project-title">Data Structures Projects (Java)</h3>
+          <p class="project-description">Core implementations of linked lists, stacks, queues, trees, and hashing with correctness and performance focus.</p>
+          <div class="project-tags">
+            <span class="project-tag">java</span>
+            <span class="project-tag">data-structures</span>
+            <span class="project-tag">algorithms</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/adam-a11/data-structures-projects" class="project-link" target="_blank" rel="noopener noreferrer">Repository</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">Postfix Calculator</h3>
+          <p class="project-description">Infix → postfix conversion using stack-based parsing and evaluation.</p>
+          <div class="project-tags">
+            <span class="project-tag">java</span>
+            <span class="project-tag">algorithms</span>
+            <span class="project-tag">parsing</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/adam-a11/data-structures-projects" class="project-link" target="_blank" rel="noopener noreferrer">Repository</a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer" style="color: var(--text); text-decoration: none; font-size: 14px;">See all projects</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <h2 class="contact-title">Any questions or just want to say hi?</h2>
+      <p class="contact-subtitle">Feel free to reach out to me</p>
+      <a href="mailto:aa12255@nyu.edu" class="contact-email-btn">aa12255@nyu.edu</a>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <h2 class="about-name">Adam Almaktari</h2>
+      <p class="about-tagline">Just want to share. But if it helps you, that's cool too.</p>
+      <div class="social-icons">
+        <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer" class="social-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer" class="social-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V11h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9.25h3.564v11.202zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:aa12255@nyu.edu" class="social-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        </a>
+      </div>
+      <div class="spotify-status">
+        <svg class="spotify-icon" fill="#1DB954" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.84-.66 0-.299.181-.54.479-.66 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.24 1.021zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        <span>Not Listening - Spotify</span>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>General</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:aa12255@nyu.edu">Contact</a></li>
+            <li><a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/adam-almaktari-390022351/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="resume.pdf" target="_blank">Resume</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 Adam Almaktari. All rights reserved.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Update time
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      const timeElement = document.getElementById('timeLocation');
+      if (timeElement) {
+        timeElement.textContent = `${timeString} 🇺🇸`;
+      }
+    }
+    updateTime();
+    setInterval(updateTime, 60000);
+
+
+    // Make all buttons functional
+    document.querySelectorAll('.btn, .project-link, .contact-email-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        if (this.href && !this.href.startsWith('#')) {
+          // External links work automatically
+          return;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+    // Generate GitHub contributions graph
+    function generateGitHubGraph() {
+      const graph = document.getElementById('githubGraph');
+      if (!graph) return;
+      
+      // Generate 53 weeks (1 year) of data
+      const weeks = 53;
+      const daysPerWeek = 7;
+      const totalDays = weeks * daysPerWeek;
+      
+      for (let i = 0; i < totalDays; i++) {
+        const day = document.createElement('div');
+        day.className = 'github-day';
+        // Randomly make some days active (you can replace this with real data)
+        if (Math.random() > 0.7) {
+          day.classList.add('active');
+        }
+        graph.appendChild(day);
+      }
+    }
+    generateGitHubGraph();
+
+    // Interactive Map
+    const mapContainer = document.getElementById('mapContainer');
+    const worldMap = document.getElementById('worldMap');
+    let isDragging = false;
+    let startX, startY;
+    let scrollLeft, scrollTop;
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+
+    if (mapContainer && worldMap) {
+      // Drag functionality
+      mapContainer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - mapContainer.offsetLeft;
+        startY = e.pageY - mapContainer.offsetTop;
+        scrollLeft = translateX;
+        scrollTop = translateY;
+        mapContainer.style.cursor = 'grabbing';
+      });
+
+      mapContainer.addEventListener('mouseleave', () => {
+        isDragging = false;
+        mapContainer.style.cursor = 'grab';
+      });
+
+      mapContainer.addEventListener('mouseup', () => {
+        isDragging = false;
+        mapContainer.style.cursor = 'grab';
+      });
+    <!-- At a Glance -->
+    <section class="glance">
+      <h2>At a Glance</h2>
+      <div class="glance-grid">
+        <div class="glance-card">
+          <div class="glance-header">
+            <svg class="glance-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span class="glance-title">New York, NY</span>
+          </div>
+          <div class="map-container" id="mapContainer">
+            <svg class="world-map" id="worldMap" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+              <!-- Ocean background -->
+              <rect width="1000" height="500" fill="rgba(0,20,40,0.5)"/>
+              
+              <!-- North America (simplified but recognizable) -->
+              <path d="M100,60 L200,50 L300,60 L400,70 L500,80 L600,90 L700,100 L800,110 L900,120 L1000,130 L1000,220 L950,250 L900,280 L850,310 L800,340 L750,370 L700,400 L650,430 L600,460 L550,490 L500,500 L450,480 L400,460 L350,440 L300,420 L250,400 L200,380 L150,360 L100,340 L50,320 L0,300 L0,200 L50,180 L100,160 L150,140 L200,120 L250,100 L300,80 L350,60 L400,40 L450,20 L500,0 L550,20 L600,40 L650,60 L700,80 L750,100 L800,120 L850,140 L900,160 L950,180 L1000,200 L1000,60 L950,50 L850,40 L750,30 L650,20 L550,10 L450,0 L350,10 L250,20 L150,30 L100,40 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              
+              <!-- South America -->
+              <path d="M320,280 L400,270 L480,280 L560,290 L640,300 L720,310 L800,320 L880,330 L920,340 L880,350 L800,360 L720,370 L640,380 L560,390 L480,400 L400,410 L320,420 L240,430 L160,440 L80,450 L0,460 L0,400 L80,380 L160,360 L240,340 L320,320 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              
+              <!-- Europe -->
+              <path d="M480,100 L560,90 L640,100 L720,110 L800,120 L880,130 L960,140 L1000,150 L1000,230 L960,270 L920,310 L880,350 L840,390 L800,430 L760,470 L720,500 L680,480 L640,460 L600,440 L560,420 L520,400 L480,380 L440,360 L400,340 L360,320 L320,300 L280,280 L240,260 L200,240 L160,220 L120,200 L80,180 L40,160 L0,140 L0,100 L40,80 L80,60 L120,40 L160,20 L200,0 L240,20 L280,40 L320,60 L360,80 L400,100 L440,120 L480,140 L520,160 L560,180 L600,200 L640,220 L680,240 L720,260 L760,280 L800,300 L840,320 L880,340 L920,360 L960,380 L1000,400 L1000,350 L960,330 L880,320 L800,310 L720,300 L640,290 L560,280 L480,270 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              
+              <!-- Africa -->
+              <path d="M520,180 L600,170 L680,180 L760,190 L840,200 L920,210 L1000,220 L1000,340 L960,380 L920,420 L880,460 L840,500 L800,480 L760,460 L720,440 L680,420 L640,400 L600,380 L560,360 L520,340 L480,320 L440,300 L400,280 L360,260 L320,240 L280,220 L240,200 L200,180 L160,160 L120,140 L80,120 L40,100 L0,80 L0,200 L40,220 L80,240 L120,260 L160,280 L200,300 L240,320 L280,340 L320,360 L360,380 L400,400 L440,420 L480,440 L520,460 L560,480 L600,500 L640,480 L680,460 L720,440 L760,420 L800,400 L840,380 L880,360 L920,340 L960,320 L1000,300 L1000,280 L960,260 L880,250 L800,240 L720,230 L640,220 L560,210 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              
+              <!-- Asia -->
+              <path d="M600,30 L700,20 L800,30 L900,40 L1000,50 L1000,180 L980,240 L960,300 L940,360 L920,420 L900,480 L880,500 L840,480 L800,460 L760,440 L720,420 L680,400 L640,380 L600,360 L560,340 L520,320 L480,300 L440,280 L400,260 L360,240 L320,220 L280,200 L240,180 L200,160 L160,140 L120,120 L80,100 L40,80 L0,60 L0,30 L40,20 L80,10 L120,0 L160,10 L200,20 L240,30 L280,40 L320,50 L360,60 L400,70 L440,80 L480,90 L520,100 L560,110 L600,120 L640,130 L680,140 L720,150 L760,160 L800,170 L840,180 L880,190 L920,200 L960,210 L1000,220 L1000,50 L960,40 L880,30 L800,20 L720,10 L640,0 L560,10 L480,20 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              
+              <!-- Australia -->
+              <path d="M800,360 L880,350 L960,360 L1000,370 L1000,410 L960,430 L880,450 L800,470 L720,490 L640,500 L560,490 L480,470 L400,450 L320,430 L240,410 L160,390 L80,370 L0,350 L0,390 L80,410 L160,430 L240,450 L320,470 L400,490 L480,500 L560,490 L640,470 L720,450 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            </svg>
+            <!-- New York marker at approximately 40.7°N, 74°W (27% from left, 42% from top) -->
+            <div class="location-marker" style="left: 27%; top: 42%;" title="New York, NY"></div>
+            <div class="map-controls">
+              <button class="map-btn" id="zoomIn" title="Zoom In">+</button>
+              <button class="map-btn" id="zoomOut" title="Zoom Out">−</button>
+              <button class="map-btn" id="resetMap" title="Reset">⌂</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glance-card">
+          <div class="glance-header">
+            <svg class="glance-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <span class="glance-title">Stacks</span>
+          </div>
+          <div class="stacks-grid">
+            <!-- Java -->
+            <svg class="stack-icon" viewBox="0 0 24 24" fill="currentColor" title="Java"><path d="M8.851 18.56s-.817.537.596.786c1.414.249 2.047.227 3.482-.124 0 0 .537.179.954.417-3.482 1.313-6.282.179-5.032-.537v-.537l-.001-.001zm-.358-1.313s-1.076.774.537 1.075c1.433.179 2.847.179 4.66-.089 0 0 .357.179.715.268-4.123 1.075-7.304.089-5.912-.537v-.537l-.001-.001zm10.246 2.229c1.722 1.254 4.66.774 4.66.774s-1.254.715-4.123 1.075c-2.688.358-6.282.268-8.256-.179-1.254-.357-.894-.537-.357-.715.715-.268 1.075-.357 1.075-.357-1.075-.715-7.125 2.229-3.125 2.688 3.304.358 6.282.089 9.26-.268 2.688-.268 4.303-1.254 2.59-1.861zm-2.688-1.432c.894 1.254 1.075 2.229.715 2.229-.179 0-.715-.268-1.254-.715-.179-.179-.357-.357-.537-.537.715-.268 1.254-.715 1.076-.537v.537l-.001-.001zm-12.525 1.432s-2.688 1.861.715 2.5c2.5.537 5.032.715 7.304.179 1.254-.268 1.075-.537.715-.715-.179-.089-.357-.179-.537-.268-2.229.715-5.208.357-7.304-.268-1.254-.357-1.254-.715-.894-.537v.089h-.001zm17.813 2.5c3.304 1.861 1.722 3.482.715 3.304-.894-.179-2.229-.715-2.229-.715s.537-.357 1.254-.894c.537-.447.894-1.075.715-1.254-.089-.179-.268-.089-.268-.089l-.207.648h.001zm1.254 1.861c.089.357-.089.715-.179.894-.089.268-.179.447-.089.715 1.722 1.075 1.254 2.229-.179 2.229-1.254 0-2.688-.537-2.688-.537s.179-.268.537-.537c.537-.357 1.075-.537 1.075-.894 0-.268-.179-.537-.179-.894 0-.537.357-.894.894-1.075l-.021.012z"/></svg>
+            <!-- Python -->
+            <svg class="stack-icon" viewBox="0 0 24 24" fill="currentColor" title="Python"><path d="M9.585 2.23c.43-.01.88-.05 1.31-.12 1.75-.22 3.48-.66 4.97-1.38.55-.27 1.06-.58 1.53-.92.19-.14.37-.28.54-.43.17-.15.33-.3.48-.46.15-.16.29-.32.43-.48.14-.16.27-.33.4-.5.13-.17.25-.34.37-.52.12-.18.23-.36.34-.55.11-.19.21-.38.31-.58.1-.2.19-.4.27-.6.08-.2.15-.4.22-.6.07-.2.13-.4.18-.6.05-.2.09-.4.12-.6.03-.2.05-.4.06-.6.01-.2.01-.4.01-.6v-.6H3.015v-.6c0-.2 0-.4-.01-.6-.01-.2-.03-.4-.06-.6-.03-.2-.07-.4-.12-.6-.05-.2-.11-.4-.18-.6-.07-.2-.14-.4-.22-.6-.08-.2-.17-.4-.27-.6-.1-.2-.2-.39-.31-.58-.11-.19-.22-.37-.34-.55-.12-.18-.24-.35-.37-.52-.13-.17-.26-.34-.4-.5-.14-.16-.28-.32-.43-.48-.15-.16-.31-.31-.48-.46-.17-.15-.35-.29-.54-.43-.47-.34-.98-.65-1.53-.92-1.49-.72-3.22-1.16-4.97-1.38-.43-.07-.87-.11-1.31-.12-.44-.01-.88-.01-1.32-.01-.44 0-.88 0-1.32.01-.44.01-.88.05-1.31.12-1.75.22-3.48.66-4.97 1.38-.55.27-1.06.58-1.53.92-.19.14-.37.28-.54.43-.17.15-.33.3-.48.46-.15.16-.29.32-.43.48-.14.16-.27.33-.4.5-.13.17-.25.34-.37.52-.12.18-.23.36-.34.55-.11.19-.21.38-.31.58-.1.2-.19.4-.27.6-.08.2-.15.4-.22.6-.07.2-.13.4-.18.6-.05.2-.09.4-.12.6-.03.2-.05.4-.06.6-.01.2-.01.4-.01.6v.6h11.99v.6c.01.2.01.4.01.6.01.2.03.4.06.6.03.2.07.4.12.6.05.2.11.4.18.6.07.2.14.4.22.6.08.2.17.4.27.6.1.2.2.39.31.58.11.19.22.37.34.55.12.18.24.35.37.52.13.17.26.34.4.5.14.16.28.32.43.48.15.16.31.31.48.46.17.15.35.29.54.43.47.34.98.65 1.53.92 1.49.72 3.22 1.16 4.97 1.38.43.07.87.11 1.31.12.44.01.88.01 1.32.01.44 0 .88 0 1.32-.01z"/></svg>
+            <!-- Git/GitHub -->
+            <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer" title="Git/GitHub">
+              <svg class="stack-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="glance-card">
+          <div class="glance-header">
+            <svg class="glance-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span class="glance-title">GitHub Contributions</span>
+          </div>
+          <div class="github-graph" id="githubGraph"></div>
+          <div class="glance-content" style="margin-top: 12px; font-size: 13px;">
+            <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none;">Less</a>
+            <span style="margin: 0 8px;">•</span>
+            <a href="https://github.com/adam-a11" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none;">More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      mapContainer.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - mapContainer.offsetLeft;
+        const y = e.pageY - mapContainer.offsetTop;
+        const walkX = (x - startX) * 0.5;
+        const walkY = (y - startY) * 0.5;
+        translateX = scrollLeft + walkX;
+        translateY = scrollTop + walkY;
+        worldMap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      });
+
+      // Touch support
+      mapContainer.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        const touch = e.touches[0];
+        startX = touch.pageX - mapContainer.offsetLeft;
+        startY = touch.pageY - mapContainer.offsetTop;
+        scrollLeft = translateX;
+        scrollTop = translateY;
+      });
+
+      mapContainer.addEventListener('touchend', () => {
+        isDragging = false;
+      });
+
+      mapContainer.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const touch = e.touches[0];
+        const x = touch.pageX - mapContainer.offsetLeft;
+        const y = touch.pageY - mapContainer.offsetTop;
+        const walkX = (x - startX) * 0.5;
+        const walkY = (y - startY) * 0.5;
+        translateX = scrollLeft + walkX;
+        translateY = scrollTop + walkY;
+        worldMap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      });
+
+      // Zoom controls
+      document.getElementById('zoomIn')?.addEventListener('click', () => {
+        scale = Math.min(scale + 0.2, 3);
+        worldMap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      });
+
+      document.getElementById('zoomOut')?.addEventListener('click', () => {
+        scale = Math.max(scale - 0.2, 0.5);
+        worldMap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      });
+
+      document.getElementById('resetMap')?.addEventListener('click', () => {
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        worldMap.style.transform = `translate(0px, 0px) scale(1)`;
+      });
+    }
